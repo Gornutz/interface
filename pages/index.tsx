@@ -58,12 +58,13 @@ const Home: NextPage = () => {
             <Image
               src="/icons/farming-home.svg"
               alt="farming image"
-              width={130}
-              height={80}
+              width={234}
+              height={138}
             />
             <p className={styles.text}>
-              Some statement about farming and making money and whatever else we
-              want to say here...
+              Earn optimal yield on autopilot with Blueberry automatically rebalanced concentrated liquidity pools.
+              <br/><br/>
+              Supercharge your returns with optional leverage.
             </p>
           </div>
 

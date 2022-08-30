@@ -22,30 +22,30 @@ const strategiesTable = [
   {
     id: 1,
     name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    tvl: '$500 USD',
+    Stablecoin: '$250 USD',
+    Token: '$250 USD',
   },
   {
     id: 2,
     name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    tvl: '$500 USD',
+    Stablecoin: '$250 USD',
+    Token: '$250 USD',
   },
   {
     id: 3,
     name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    tvl: '$500 USD',
+    Stablecoin: '$250 USD',
+    Token: '$250 USD',
   },
   {
     id: 4,
     name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    tvl: '$500 USD',
+    Stablecoin: '$250 USD',
+    Token: '$250 USD',
   },
 ] as StrategiesTable[]
 
@@ -95,7 +95,7 @@ const Earn: NextPage = () => {
     newPositionOpenHandler(value)
   }
   return (
-    <div className="h-full items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block">
+    <div className="md:h-[90px] items-center  mt-3 md:px-16 sm:px-1 2sm:px0 sm:h-[150px] sm:block">
       {width <= 680 && (
         <header className="md:h-[90px] pb-4 md:flex items-center md:px-16 sm:px-1 2sm:px0 sm:h-[150px] sm:block">
           <Text>
@@ -120,13 +120,14 @@ const Earn: NextPage = () => {
       <div className={styles.topContainer}>
         <div>
           <h4 className={styles.heading}>
-            Vaults - Utilize up to 3x leverage on LP strategies while maintaining your single sided token exposure as collateral
+            Vaults - Up to 3x leverage on LP strategies while maintaining your
+            preferred token as collateral.
           </h4>
-          {/* <p className={styles.text}>
+          <p className={styles.text}>
             We allow capital efficient leverage for token holders with flexible
             collateral, so you can earn boosted yield on your holdings and
             support your token&apos;s price with deeper liquidity
-          </p> */}
+          </p>
         </div>
         <div className={styles.rightContainer}>
           <h4 className={styles.title}>Vaults TVL</h4>
@@ -171,10 +172,10 @@ const Earn: NextPage = () => {
               <tr>
                 <td className={styles.tHeading}>Strategies</td>
                 <td className={styles.tHeading}>TVL</td>
-                <td className={`${styles.tHeading} ${styles.tCenter}`}>
+                <td className={styles.tHeading}>
                   Stablecoin Collateral Yield (@1x, at max lev)
                 </td>
-                <td className={`${styles.tHeading} ${styles.tCenter}`}>
+                <td className={styles.tHeading}>
                   Token Collateral Yield (at max lev)
                 </td>
                 <td className={styles.tHeading}></td>
@@ -198,8 +199,8 @@ const Earn: NextPage = () => {
                       </div>
                     </td>
                     <td>{row.tvl}</td>
-                    <td className={styles.alignCenter}>{row.Stablecoin}</td>
-                    <td className={styles.alignCenter}>{row.Token}</td>
+                    <td>{row.Stablecoin}</td>
+                    <td className={styles.columnRoundRight}>{row.Token}</td>
                     <td>
                       <CustomButton
                         title="New Position"

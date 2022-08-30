@@ -23,6 +23,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
         <thead className={styles.header}>
           <tr>
             <th>Current Strategy</th>
+            <th>Strategy Net APY %<br/>(Weekly Earnings)</th>
             <th>Total Position</th>
             <th>Debt Value</th>
             <th>Equity Value</th>
@@ -51,17 +52,22 @@ const TableGrid = ({ newPositionOpenHandler }) => {
             </td>
             <td>
               {' '}
+              <span className={styles.tdSubtitle}>Strategy Net APY %<br/>(Weekly Earnings)</span>
+              <span className={styles.coltd}> 90% ($8.65)</span>
+            </td>
+            <td>
+              {' '}
               <span className={styles.tdSubtitle}>Total Position</span>
               <span className={styles.coltd}> $500 USD</span>
             </td>
             <td>
               {' '}
               <span className={styles.tdSubtitle}>Debt Value</span>{' '}
-              <span className={styles.coltd}> $250 USD</span>
+              <span className={styles.coltd}> $250 USD<span className={styles.smallColtd}> (12%)</span></span>
             </td>
             <td className={styles.tdSubtitle}>
               {' '}
-              <span>Equity Value</span>{' '}
+              <span className={styles.tdSubtitle}>Equity Value</span>{' '}
               <span className={styles.coltd}> $250 USD</span>
             </td>
           </tr>
@@ -71,7 +77,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
             <td>
               <span>Strategy Health: 50%</span>
             </td>
-            <td colSpan={3}>
+            <td colSpan={4}>
               {/* <div className={styles.innerContainer}>
                             <div className={styles.container}></div>
                         </div> */}
@@ -100,8 +106,9 @@ const TableGrid = ({ newPositionOpenHandler }) => {
                 </span>
               </div>
             </td>
+            <td> 90% ($8.65)</td>
             <td> $500 USD</td>
-            <td>$250 USD</td>
+            <td><span className={styles.coltd}> $250 USD<span className={styles.smallColtd}> (12%)</span></span></td>
             <td>$250 USD</td>
           </tr>
 
@@ -111,7 +118,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
             <td>
               <span>Strategy Health: 75%</span>
             </td>
-            <td colSpan={3}>
+            <td colSpan={4}>
               <ProgressBar1
                 color={`linear-gradient(63.51deg, #007994 33.26%, #04ac5c 100%)`}
                 value={70}
