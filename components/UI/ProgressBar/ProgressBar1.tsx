@@ -13,12 +13,12 @@ const BorderLinearProgress = styled(LinearProgress)((props) => ({
     },
     [`& .${linearProgressClasses.barColorPrimary}`]: {
       borderRadius: 5,
-      background: 'linear-gradient(89.83deg, #0056E0 0.3%, #57C5E0 99.81%)',
+      background: 'linear-gradient(63.51deg, #007994 33.26%, #04AC5C 100%)',
     },
   }));
 
 
-const ProgressBar = (props: any) => {
+const ProgressBar1 = (props: any) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <BorderLinearProgress
@@ -29,4 +29,4 @@ const ProgressBar = (props: any) => {
   );
 }
 
-export default ProgressBar
+export default ProgressBar1

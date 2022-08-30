@@ -69,7 +69,7 @@ const Header = () => {
               height={40}
             />
 
-            <Dropdown></Dropdown>
+            <Dropdown className={'flex-1'}></Dropdown>
             {isOverview && (
               <Button type="button" className="bg-white-01">
                 <span className={`mr-3`}>100.54 ETH</span>{' '}
@@ -124,11 +124,11 @@ const Header = () => {
               open ? '-translate-x-0' : '-translate-x-full'
             } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
           >
-          <div className={`${styles.mobileNavbarContainer} h-[90px]`}>
-          <div className="flex flex-col ml-4 h-full">
-             <Sidebar />
+            <div className={`${styles.mobileNavbarContainer} h-[90px]`}>
+              <div className="flex flex-col ml-4 h-full">
+                <Sidebar />
+              </div>
             </div>
-          </div>
           </div>
         </>
       )}

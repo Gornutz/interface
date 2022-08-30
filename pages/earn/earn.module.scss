@@ -61,6 +61,7 @@
   .tHeading {
     color: #8d97a0;
     padding: 1rem;
+    font-size: 14px;
     @include for-size(phone-only) {
       font-size: 0.8em;
     }
@@ -71,6 +72,7 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       color: white;
+      font-size: 14px;
       padding: 1rem;
       @include for-size(phone-only) {
         font-size: 0.8em;

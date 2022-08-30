@@ -16,6 +16,7 @@ import Button from '../../components/UI/Button/Button'
 import Dropdown from '../../components/UI/Dropdown/Dropdown'
 import Text from '../../components/UI/Text/Text'
 import { useWidth } from '../../hooks/useWidth'
+import AvailableFaultMobile from './availableFaultMobile/availableFaultMobile'
 
 const strategiesTable = [
   {
@@ -157,56 +158,66 @@ const Earn: NextPage = () => {
         />
       </Tabs>
       <div className={styles.divider}></div>
-      {value == 0 && <TableGrid></TableGrid>}
+      {value == 0 && (
+        <TableGrid newPositionOpenHandler={newPositionOpenHandler}></TableGrid>
+      )}
       {value == 1 && <div></div>}
 
-      <div className="mt-10">
-        <table className={styles.table_bottom}>
-          <thead className={styles.header}>
-            <tr>
-              <td className={styles.tHeading}>Strategies</td>
-              <td className={styles.tHeading}>TVL</td>
-              <td className={styles.tHeading}>
-                Stablecoin Collateral Yield (@1x, at max lev)
-              </td>
-              <td className={styles.tHeading}>
-                Token Collateral Yield (at max lev)
-              </td>
-              <td className={styles.tHeading}></td>
-            </tr>
-          </thead>
-          <tbody className={styles.tbody}>
-            {strategiesTable.map((row) => {
-              return (
-                <tr key={row.id}>
-                  <td className={styles.columnRoundLeft}>
-                    <div className={styles.tableCol}>
-                      <Image
-                        src="/icons/pic.svg"
-                        width={40}
-                        height={40}
-                        alt="image"
+      {width <= 680 ? (
+        <AvailableFaultMobile strategiesTable={strategiesTable || []} />
+      ) : (
+        <div className="mt-10">
+          <table className={styles.table_bottom}>
+            <thead className={styles.header}>
+              <tr>
+                <td className={styles.tHeading}>Strategies</td>
+                <td className={styles.tHeading}>TVL</td>
+                <td className={styles.tHeading}>
+                  Stablecoin Collateral Yield (@1x, at max lev)
+                </td>
+                <td className={styles.tHeading}>
+                  Token Collateral Yield (at max lev)
+                </td>
+                <td className={styles.tHeading}></td>
+              </tr>
+            </thead>
+            <tbody className={styles.tbody}>
+              {strategiesTable.map((row) => {
+                return (
+                  <tr key={row.id}>
+                    <td className={styles.columnRoundLeft}>
+                      <div className={styles.tableCol}>
+                        <Image
+                          src="/icons/pic.svg"
+                          width={40}
+                          height={40}
+                          alt="image"
+                        />
+                        <span style={{ paddingLeft: '0.7rem' }}>
+                          {row.name}
+                        </span>
+                      </div>
+                    </td>
+                    <td>{row.tvl}</td>
+                    <td>{row.Stablecoin}</td>
+                    <td className={styles.columnRoundRight}>{row.Token}</td>
+                    <td>
+                      <CustomButton
+                        title="New Position"
+                        buttonStyle={styles.buttonStyle}
+                        handleButtonClick={() =>
+                          newPositionOpenHandler('new-position')
+                        }
                       />
-                      <span style={{ paddingLeft: '0.7rem' }}>{row.name}</span>
-                    </div>
-                  </td>
-                  <td>{row.tvl}</td>
-                  <td>{row.Stablecoin}</td>
-                  <td className={styles.columnRoundRight}>{row.Token}</td>
-                  <td>
-                    <CustomButton
-                      title="New Position"
-                      handleButtonClick={() =>
-                        newPositionOpenHandler('new-position')
-                      }
-                    />
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
       <Popup
         // onClick={(e) => newPositionOpenHandler('success-position')}
         isOpen={NewOpen}
