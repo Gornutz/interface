@@ -1,0 +1,76 @@
+.dialog {
+  backdrop-filter: blur(3px);
+  z-index: 999;
+}
+
+.container {
+  font-weight: 100 !important;
+  margin-bottom: 15px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #21b499;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e6e7e7;
+  }
+
+  .header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    font-weight: 100;
+    font-size: 26px;
+    font-weight: 500;
+
+    .popupContainer {
+      color: white;
+      font-weight: 500;
+      line-height: 44px;
+    }
+
+    .closeIcon {
+      position: absolute;
+      right: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .inputField {
+    margin-left: 20px;
+    margin-right: 20px;
+
+    .inputFieldColor {
+      background-color: rgba(0, 0, 0, 0.6) !important;
+      backdrop-filter: blur(1px) !important;
+      border: 1px solid rgb(255, 255, 255) !important;
+    }
+  }
+
+  .createPlaylist {
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(1px) !important;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid rgb(255, 255, 255);
+  }
+
+  .buttonStyle {
+    position: relative;
+    right: 20px;
+  }
+
+  .content {
+    padding: 1.5rem;
+    padding-top: 0;
+  }
+}

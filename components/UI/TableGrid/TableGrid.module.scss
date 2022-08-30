@@ -1,0 +1,130 @@
+@import '../../../styles/mixin.scss';
+
+.table {
+    margin-top: 1rem;
+    width: 100%;
+    overflow-x: scroll;
+
+    .header {
+        tr th {
+            color: #8d97a0;
+            padding: 1rem;
+            text-align: left;
+
+            @include for-size(phone-only) {
+                display: none;
+            }
+        }
+    }
+
+    :is(tbody, thead) {
+        tr {
+            @include for-size(phone-only) {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+
+    .tbody {
+
+        td {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding: 1rem;
+
+            span:first-child{
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 24px;             
+                color: #8D97A0;           
+            }
+
+            @include for-size(phone-only) {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.8em;
+            }
+        }
+
+        .columnRoundLeft {
+            border-top-left-radius: 10px;
+        }
+
+        .columnRoundRight {
+            border-top-right-radius: 10px;
+        }
+
+        .columnRoundBottomLeft {
+            border-bottom-left-radius: 10px;
+        }
+
+        .columnRoundBottomRight {
+            border-bottom-right-radius: 10px;
+        }
+    }
+
+    .tableCol {
+        display: flex;
+        align-items: center;
+    }
+
+    .bottom {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .rowBottom {
+     
+        // align-items: center;
+         width: 100%;
+        // justify-content: flex-end;
+        // margin: auto;
+
+        @include for-size(phone-only) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            column-gap: 20px;
+            justify-content: unset;
+
+            
+            td{
+                width: 100%;
+                span:first-child{
+                    color: #FFFFFF !important;
+                    margin-bottom: 10px;
+                }
+            }
+
+
+        }
+
+        .innerContainer {
+            height: 10px;
+            width: 100%;
+            background-color: #02172c;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .container {
+            position: absolute;
+            height: 10px;
+            width: 50%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(89.83deg, #0056e0 0.3%, #57c5e0 99.81%);
+            border-radius: 20px;
+        }
+
+        .bottomContainer {
+            background: linear-gradient(63.51deg, #007994 33.26%, #04ac5c 100%);
+            position: absolute;
+            height: 10px;
+            width: 50%;
+            top: 0;
+            left: 0;
+            border-radius: 20px;
+        }
+    }
+}
