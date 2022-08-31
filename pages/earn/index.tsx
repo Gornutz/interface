@@ -120,13 +120,11 @@ const Earn: NextPage = () => {
       <div className={styles.topContainer}>
         <div>
           <h4 className={styles.heading}>
-            Vaults - Utilize up to 3x leverage on LP strategies while maintaining your single sided token exposure as collateral
+            Vaults
           </h4>
-          {/* <p className={styles.text}>
-            We allow capital efficient leverage for token holders with flexible
-            collateral, so you can earn boosted yield on your holdings and
-            support your token&apos;s price with deeper liquidity
-          </p> */}
+          <p className={styles.text}>
+            Utilize up to 3x leverage on LP strategies while maintaining your preferred token position as collateral
+          </p>
         </div>
         <div className={styles.rightContainer}>
           <h4 className={styles.title}>Vaults TVL</h4>
@@ -172,10 +170,10 @@ const Earn: NextPage = () => {
                 <td className={styles.tHeading}>Strategies</td>
                 <td className={styles.tHeading}>TVL</td>
                 <td className={`${styles.tHeading} ${styles.tCenter}`}>
-                  Stablecoin Collateral Yield (@1x, at max lev)
+                  Stablecoin Collateral Yield (1x - 3x)
                 </td>
                 <td className={`${styles.tHeading} ${styles.tCenter}`}>
-                  Token Collateral Yield (at max lev)
+                  Token Collateral Yield (1x-1.5x)
                 </td>
                 <td className={styles.tHeading}></td>
               </tr>

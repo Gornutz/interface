@@ -1,33 +1,111 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-
-const marks = [
-  {
-    value: 1,
-    label: '1',
-  },
-  {
-    value: 100,
-    label: '3',
-  },
-];
+import { styled } from '@mui/material/styles';
 
 function valuetext(value: number) {
-  return `${value}°C`;
+  return `${value}x`;
 }
+const iOSBoxShadow =
+  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
-export default function LeverageSlider() {
+const IOSSlider = styled(Slider)(({ theme }) => ({
+  color: theme.palette.mode === 'dark' ? '#3880ff' : '#3880ff',
+  height: 2,
+  padding: '15px 0',
+  '& .MuiSlider-thumb': {
+    height: 16,
+    width: 16,
+    backgroundColor: '#05A06B',
+    boxShadow: iOSBoxShadow,
+    '&:focus, &:hover, &.Mui-active': {
+      boxShadow:
+        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+      // Reset on touch devices, it doesn't add specificity
+      '@media (hover: none)': {
+        boxShadow: iOSBoxShadow,
+      },
+    },
+  },
+  '& .MuiSlider-valueLabel': {
+    fontSize: '18px',
+    fontWeight: '500',
+    top: 0,
+    backgroundColor: 'unset',
+    color: '#fff',
+    '&:before': {
+      display: 'none',
+    },
+    '& *': {
+      background: 'transparent',
+      color: '#fff',
+    },
+  },
+  '& .MuiSlider-track': {
+    border: 'none',
+  },
+  '& .MuiSlider-rail': {
+    // opacity: 0.5,
+    backgroundColor: '#254866',
+    borderRadius: '20px',
+    height: '10px'
+  },
+  '& .MuiSlider-markLabel': {
+    color: '#fff',
+    fontSize: '14px',
+  },
+  '& .MuiSlider-mark': {
+    backgroundColor: '#376081',
+    height: 10,
+    width: 2,
+    '&.MuiSlider-markActive': {
+      opacity: 1,
+      backgroundColor: 'currentColor',
+    },
+  },
+}));
+
+export default function LeverageSlider({
+  marks,
+  max,
+  realMax
+}: {
+  marks: any,
+  max: number,
+  realMax: number
+}) {
+  const [value1, setValue1] = useState(1.25);
+
+  const handleChange1 = (
+    event: Event,
+    newValue: number | number[],
+  ) => {
+    if (Array.isArray(newValue)) {
+      return;
+    }
+    if(newValue > realMax) {
+      newValue = realMax;
+    }
+    setValue1(newValue);
+  };
+  useEffect(() => {
+    setValue1(1.25)
+  }, [marks, max, realMax])
   return (
     <Box sx={{ width: 300 }}>
-      <Slider
-        aria-label="Custom marks"
-        defaultValue={1}
+      <IOSSlider
+        track={false}
+        aria-label="ios slider"
         getAriaValueText={valuetext}
-        step={3}
-        valueLabelDisplay="auto"
+        valueLabelFormat={valuetext}
+        onChange={handleChange1}
+        value={value1}
         marks={marks}
-        color="secondary"
+        valueLabelDisplay="on"
+        step={0.01}
+        min={0}
+        max={max}
       />
     </Box>
   );

@@ -30,7 +30,7 @@ const FaultMobile = ({ row }: any) => {
         <span className={styles.containerSubTitle}>{row.Stablecoin}</span>
       </div>
       <div className={`flex justify-between ${styles.container} `}>
-        <span className={styles.containerTitle}>Token Collateral Yield</span>
+        <span className={styles.containerTitle}>Token Collateral Yield (1x-1.5x)</span>
         <span className={styles.containerSubTitle}>{row.Token}</span>
       </div>
     </div>

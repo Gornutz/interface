@@ -15,14 +15,14 @@
   .text {
     color: #8d97a0;
     font-family: 12px;
-    width: 70%;
+    width: 100%;
+    margin-top: 0.4rem;
+    line-height: 18px;
     @include for-size(phone-only) {
       width: 100%;
       margin-top: 0.8rem;
       line-height: 20.56px;
     }
-    margin-top: 0.4rem;
-    line-height: 18px;
   }
   .rightContainer {
     @include for-size(phone-only) {

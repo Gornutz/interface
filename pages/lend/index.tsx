@@ -8,6 +8,8 @@ import CustomButton from '../../components/UI/customButton/customButton'
 import { useWidth } from '../../hooks/useWidth'
 import styles from './lend.module.scss'
 import MobileTableLend from './mobileTableLend/mobileTableLend'
+import DepositModal from './depositModal/depositModal'
+import Popup from '../../components/UI/Popup/popup'
 
 const tableData = [
   {
@@ -43,14 +45,22 @@ const tableData = [
 ]
 
 const Earn: NextPage = () => {
+  const [depositDlgOpen, setDepositDlgOpen] = useState(false)
   const [value, setValue] = useState(0)
   const width = useWidth()
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
+
+  const closeDepositModal = () => {
+    setDepositDlgOpen(false)
+  }
+  const handleSuccessPosition = (value: string) => {
+    closeDepositModal()
+  }
   return (
-    <div className="md:h-[90px] items-center  mt-3 md:px-16 sm:px-1 2sm:px0 sm:h-[150px] sm:block">
+    <div className="h-full items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block">
       <div className={styles.topContainer}>
         <div>
           <h4 className={styles.heading}>Lending</h4>
@@ -175,10 +185,10 @@ const Earn: NextPage = () => {
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {}}
+                      handleButtonClick={() => {setDepositDlgOpen(true)}}
                       buttonStyle={styles.depositButton}
                     />
-                    <Image src="/icons/union.svg" width={20} height={20} />
+                    {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
                   </div>
                 </td>
               </tr>
@@ -205,10 +215,10 @@ const Earn: NextPage = () => {
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {}}
+                      handleButtonClick={() => {setDepositDlgOpen(true)}}
                       buttonStyle={styles.depositButton}
                     />
-                    <Image src="/icons/union.svg" width={20} height={20} />
+                    {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
                   </div>
                 </td>
               </tr>
@@ -235,10 +245,10 @@ const Earn: NextPage = () => {
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {}}
+                      handleButtonClick={() => {setDepositDlgOpen(true)}}
                       buttonStyle={styles.depositButton}
                     />
-                    <Image src="/icons/union.svg" width={20} height={20} />
+                    {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
                   </div>
                 </td>
               </tr>
@@ -268,6 +278,15 @@ const Earn: NextPage = () => {
           </table>
         </div>
       )}
+
+      <Popup
+        // onClick={(e) => newPositionOpenHandler('success-position')}
+        isOpen={depositDlgOpen}
+        handleClose={closeDepositModal}
+        title={'Deposit'}
+      >
+        <DepositModal handleButtonClick={handleSuccessPosition} />
+      </Popup>
     </div>
   )
 }

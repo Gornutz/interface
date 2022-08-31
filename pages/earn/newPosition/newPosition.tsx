@@ -16,6 +16,11 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
   // const handleType = () => {
   //     setValue('success')
   // }
+  const [collateral, setCollateral] = useState('ICHI');
+  const handleCollateralChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCollateral((event.target as HTMLInputElement).value);
+  };
+
   const handleSuccessPosition = () => {
     handleButtonClick?.("success-position");
   };
@@ -47,21 +52,41 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              value={collateral}
+              onChange={handleCollateralChange}
             >
               <FormControlLabel
                 value="ICHI"
                 color="secondary"
-                control={<Radio />}
-                label="ICHI"
+                control={<Radio sx={{
+                  color: '#fff',
+                  '&.Mui-checked': {
+                    color: '#05A06B',
+                    'svg:first-of-type': {
+                      color: '#fff'
+                    }
+                  },
+                }}/>}
+                label={<span style={{color: collateral == "ICHI" ? "#fff" : "#8D97A0"}}>ICHI</span>}
               />
-              <input type="text" />
+              <input type="text" disabled={collateral == "ICHI" ? false : true} className={collateral == "ICHI" ? "" : Style.inputDisabled} />
+
               <FormControlLabel
                 value="USDC"
                 color="secondary"
-                control={<Radio />}
-                label="USDC"
+                control={<Radio sx={{
+                  color: '#fff',
+                  marginLeft: '10px',
+                  '&.Mui-checked': {
+                    color: '#05A06B',
+                    'svg:first-of-type': {
+                      color: '#fff'
+                    }
+                  },
+                }}/>}
+                label={<span style={{color: collateral == "USDC" ? "#fff" : "#8D97A0"}}>USDC</span>}
               />
-              <input type="text" />
+              <input type="text" disabled={collateral == "USDC" ? false : true} className={collateral == "USDC" ? "" : Style.inputDisabled} />
             </RadioGroup>
           </FormControl>
         </div>
@@ -71,7 +96,39 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
           <label className={` ${Style.chooseSubContainerLabel}`}>
             Choose Leverage
           </label>
-          <LeverageSlider />
+          {
+            collateral == "USDC" ? (
+              <LeverageSlider
+                marks={[
+                  {
+                    value: 1,
+                    label: '1x',
+                  },
+                  {
+                    value: 3,
+                    label: '3x',
+                  },
+                ]}
+                max={4}
+                realMax={3}
+              />
+            ) : (
+              <LeverageSlider
+                marks={[
+                  {
+                    value: 1,
+                    label: '1x',
+                  },
+                  {
+                    value: 1.5,
+                    label: '1.5x',
+                  },
+                ]}
+                max={2}
+                realMax={1.5}
+              />
+            )
+          }
         </div>
       </div>
 
