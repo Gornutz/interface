@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { useState } from 'react'
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
 import Card from "../components/UI/Card/Card";
@@ -8,9 +9,37 @@ import CustomButton from "../components/UI/customButton/customButton";
 import { useWidth } from "../hooks/useWidth";
 import Dropdown from "../components/UI/Dropdown/Dropdown";
 import Button from "../components/UI/Button/Button";
+import Popup from '../components/UI/Popup/popup';
+import YourPosition from './earn/yourPosition/yourPosition';
+import ClosePosition from './earn/closePosition/closePosition'
+import EditPosition from './earn/editPosition/editPosition'
 
 const Home: NextPage = () => {
+  const [YourPosOpen, setYourPosition] = useState(false)
+  const [ClosePos, setClosePosition] = useState(false)
+  const [EditPosOpen, setEditPosition] = useState(false)
   const width = useWidth();
+
+  const handleClosepositionPopup = (value: string) => {
+    setYourPosition(false)
+    newPositionOpenHandler(value)
+  }
+  const newPositionOpenHandler = (title: string) => {
+    console.log(title)
+    switch (title) {
+      case 'your-position':
+        setYourPosition(true)
+        break
+      case 'edit-position':
+        setEditPosition(true)
+        break
+      case 'close-position':
+        setClosePosition(true)
+        break
+      default:
+        break
+    }
+  }
   return (
     <>
       {
@@ -54,7 +83,7 @@ const Home: NextPage = () => {
             " my-8 rounded-lg px-8 1sm:block py-5"
           }
         >
-          <div className={`${styles.topContainer} `}>
+          <div className={styles.topContainer}>
             <Image
               src="/icons/farming-home.svg"
               alt="farming image"
@@ -68,7 +97,7 @@ const Home: NextPage = () => {
             </p>
           </div>
 
-          <CustomButton buttonStyle={`${width <= 768 && 'w-full'}`} title={"Start Farming"} handleButtonClick={() => { }} />
+          <CustomButton buttonStyle={`${width <= 768 && 'w-full'}`} title={"Start Earning"} handleButtonClick={() => { }} />
         </div>
         <div className="md:flex gap-8 flex-row my-8 sm:block 2sm:block">
           <div className="net-pay-box basis-1/2 px-6 py-8 ">
@@ -145,7 +174,10 @@ const Home: NextPage = () => {
             <Text>
               <h6 className="text-muted">Position Value Breakdown</h6>
             </Text>
-            <div className={`${styles.lendingRow} mt-5 ${width <= 768 && 'flex-column'}`}>
+            <div
+              className={`${styles.lendingRow} mt-5 ${width <= 768 && 'flex-column'} cursor-pointer`}
+              onClick={(event) => newPositionOpenHandler('your-position')}
+            >
               <div className={styles.rightRow}>
                 <Image src="/icons/pic.svg" width={35} height={35} alt="image" />
                 <div className={styles.container}>
@@ -160,7 +192,10 @@ const Home: NextPage = () => {
                 <span className={styles.percentage}>50%</span>
               </div>
             </div>
-            <div className={`${styles.lendingRow}  ${width <= 768 && 'flex-column'}`}>
+            <div 
+              className={`${styles.lendingRow}  ${width <= 768 && 'flex-column'} cursor-pointer`}
+              onClick={(event) => newPositionOpenHandler('your-position')}
+            >
               <div className={styles.rightRow}>
                 <Image src="/icons/pic.svg" width={35} height={35} alt="image" />
                 <div className={styles.container}>
@@ -178,6 +213,41 @@ const Home: NextPage = () => {
           </div>
         </div>
       </Card>
+      <Popup
+        isOpen={YourPosOpen}
+        title={'Your Position'}
+        handleClose={() => {
+          setYourPosition(false)
+        }}
+      >
+        <YourPosition handleClosepositionPopup={handleClosepositionPopup} />
+      </Popup>
+      <Popup
+        isOpen={EditPosOpen}
+        title={'Edit Position'}
+        handleClose={() => {
+          setEditPosition(false)
+        }}
+      >
+        <EditPosition
+          handleClose={() => {
+            setEditPosition(false)
+          }}
+        />
+      </Popup>
+      <Popup
+        isOpen={ClosePos}
+        title={'Close Position'}
+        handleClose={() => {
+          setClosePosition(false)
+        }}
+      >
+        <ClosePosition
+          handleClose={() => {
+            setClosePosition(false)
+          }}
+        />
+      </Popup>
     </>
   );
 };

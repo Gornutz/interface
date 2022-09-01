@@ -16,7 +16,7 @@ const RowLend = ({ row }: any) => {
             title="Deposit"
             handleButtonClick={() => {}}
           />
-          <Image src="/icons/union.svg" width={20} height={20} />
+          {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
         </div>
       </div>
 

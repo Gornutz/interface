@@ -72,6 +72,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
             </td>
           </tr>
           <tr
+            onClick={(event) => newPositionOpenHandler('your-position')}
             className={` ${styles.bottom} ${styles.rowBottom} cursor-pointer`}
           >
             <td>
@@ -88,7 +89,10 @@ const TableGrid = ({ newPositionOpenHandler }) => {
             </td>
           </tr>
 
-          <tr className="cursor-pointer">
+          <tr
+            onClick={(event) => newPositionOpenHandler('your-position')}
+            className="cursor-pointer"
+          >
             <td>
               <div className={styles.tableCol}>
                 <Image
@@ -113,6 +117,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
           </tr>
 
           <tr
+            onClick={(event) => newPositionOpenHandler('your-position')}
             className={` ${styles.bottom} ${styles.rowBottom} cursor-pointer`}
           >
             <td>

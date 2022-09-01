@@ -69,7 +69,7 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
                 }}/>}
                 label={<span style={{color: collateral == "ICHI" ? "#fff" : "#8D97A0"}}>ICHI</span>}
               />
-              <input type="text" disabled={collateral == "ICHI" ? false : true} className={collateral == "ICHI" ? "" : Style.inputDisabled} />
+              <input type="text" className={collateral == "ICHI" ? "" : Style.inputDisabled} onClick={() => setCollateral("ICHI")} />
 
               <FormControlLabel
                 value="USDC"
@@ -86,7 +86,7 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
                 }}/>}
                 label={<span style={{color: collateral == "USDC" ? "#fff" : "#8D97A0"}}>USDC</span>}
               />
-              <input type="text" disabled={collateral == "USDC" ? false : true} className={collateral == "USDC" ? "" : Style.inputDisabled} />
+              <input type="text" className={collateral == "USDC" ? "" : Style.inputDisabled} onClick={() => setCollateral("USDC")} />
             </RadioGroup>
           </FormControl>
         </div>

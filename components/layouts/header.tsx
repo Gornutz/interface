@@ -14,6 +14,7 @@ import WalletPage from './wallet'
 const Header = () => {
   const [title, setTitle] = useState('Overview')
   const [isEarn, setIsEarn] = useState(false)
+  const [isLend, setIsLend] = useState(false)
   const [isWallet, setWalletToggle] = useState(false)
   const [isOverview, setIsOverview] = useState(false)
   const [open, setOpen] = useState(false)
@@ -26,16 +27,19 @@ const Header = () => {
       case '/earn':
         setTitle('Earn')
         setIsEarn(true)
+        setIsLend(false)
         setIsOverview(false)
         break
 
       case '/lend':
         setTitle('Lend')
         setIsEarn(false)
+        setIsLend(true)
         setIsOverview(false)
         break
       default:
         setTitle('Overview')
+        setIsLend(false)
         setIsEarn(false)
         setIsOverview(true)
         break
@@ -76,7 +80,7 @@ const Header = () => {
                 <span> 0x575...A57D</span>
               </Button>
             )}
-            {isEarn && (
+            {(isEarn || isLend) && (
               <CustomButton
                 title="Connect Wallet"
                 handleButtonClick={handleConnectClick}

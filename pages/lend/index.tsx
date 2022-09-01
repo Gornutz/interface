@@ -46,6 +46,7 @@ const tableData = [
 
 const Earn: NextPage = () => {
   const [depositDlgOpen, setDepositDlgOpen] = useState(false)
+  const [tokenName, setTokenName] = useState("ICHI")
   const [value, setValue] = useState(0)
   const width = useWidth()
 
@@ -60,7 +61,7 @@ const Earn: NextPage = () => {
     closeDepositModal()
   }
   return (
-    <div className="h-full items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block">
+    <div className={`${width <= 680 ? 'h-fit' : 'h-full'} items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block`}>
       <div className={styles.topContainer}>
         <div>
           <h4 className={styles.heading}>Lending</h4>
@@ -147,7 +148,7 @@ const Earn: NextPage = () => {
       {width <= 680 ? (
         <MobileTableLend tableData={tableData || []} />
       ) : (
-        <div className="mt-10">
+        <div className="mt-10 pb-40">
           <table className={styles.table_bottom}>
             <thead className={styles.header}>
               <tr>
@@ -185,7 +186,7 @@ const Earn: NextPage = () => {
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {setDepositDlgOpen(true)}}
+                      handleButtonClick={() => {setDepositDlgOpen(true); setTokenName("ICHI");}}
                       buttonStyle={styles.depositButton}
                     />
                     {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
@@ -215,7 +216,7 @@ const Earn: NextPage = () => {
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {setDepositDlgOpen(true)}}
+                      handleButtonClick={() => {setDepositDlgOpen(true); setTokenName("oneICHI");}}
                       buttonStyle={styles.depositButton}
                     />
                     {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
@@ -245,7 +246,7 @@ const Earn: NextPage = () => {
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {setDepositDlgOpen(true)}}
+                      handleButtonClick={() => {setDepositDlgOpen(true); setTokenName("USDC");}}
                       buttonStyle={styles.depositButton}
                     />
                     {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
@@ -285,7 +286,7 @@ const Earn: NextPage = () => {
         handleClose={closeDepositModal}
         title={'Deposit'}
       >
-        <DepositModal handleButtonClick={handleSuccessPosition} />
+        <DepositModal tokenName={tokenName} handleButtonClick={handleSuccessPosition} />
       </Popup>
     </div>
   )

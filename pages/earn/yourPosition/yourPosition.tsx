@@ -1,7 +1,7 @@
 import Style from './yourPosition.module.scss'
 const YourPosition = ({ handleClosepositionPopup }: any) => {
-  const handleClick = () => {
-    handleClosepositionPopup('close-position')
+  const handleClick = (value: string) => {
+    handleClosepositionPopup(value)
   }
 
   return (
@@ -46,10 +46,14 @@ const YourPosition = ({ handleClosepositionPopup }: any) => {
           </div>
         </div>
       </div>
-
-      <button className={`mt-4 ${Style.button}`} onClick={handleClick}>
-        Close Positon
-      </button>
+      <div className="flex justify-around">
+        <button className={`mt-4 ${Style.button}`} onClick={() => handleClick('close-position')}>
+          Close Positon
+        </button>
+        <button className={`mt-4 ${Style.button}`} onClick={() => handleClick('edit-position')}>
+          Edit Collateral
+        </button>
+      </div>
     </div>
   )
 }
