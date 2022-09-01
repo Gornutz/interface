@@ -105,36 +105,52 @@ const Sidebar = () => {
           Join Us
         </h5>
         <div>
-          <Image
-            src="/icons/twitter.svg"
-            alt="farming image"
-            width={20}
-            height={18}
-          />
+          <Link href={"https://twitter.com/BLBprotocol/"}>
+            <a>
+              <Image
+                src="/icons/twitter.svg"
+                alt="twitter"
+                width={20}
+                height={18}
+              />
+            </a>
+          </Link>
         </div>
         <div>
-          <Image
-            src="/icons/discord.svg"
-            alt="farming image"
-            width={20}
-            height={18}
-          />
+          <Link href={"https://discord.com/invite/VJAPVjy5uk"}>
+            <a>
+              <Image
+                src="/icons/discord.svg"
+                alt="discord"
+                width={20}
+                height={18}
+              />
+            </a>
+          </Link>
         </div>
         <div>
-          <Image
-            src="/icons/git.svg"
-            alt="farming image"
-            width={20}
-            height={18}
-          />
+          <Link href={"https://github.com/Blueberryfi"}>
+            <a>
+              <Image
+                src="/icons/git.svg"
+                alt="github"
+                width={20}
+                height={18}
+              />
+            </a>
+          </Link>
         </div>
         <div>
-          <Image
-            src="/icons/m_icon.svg"
-            alt="farming image"
-            width={20}
-            height={18}
-          />
+          <Link href={"https://medium.com/@blueberryprotocol"}>
+            <a>
+              <Image
+                src="/icons/m_icon.svg"
+                alt="medium"
+                width={20}
+                height={18}
+              />
+            </a>
+          </Link>
         </div>
       </div>
       {/* <div className='md:flex justify-center sm:hidden 2sm:hidden'>

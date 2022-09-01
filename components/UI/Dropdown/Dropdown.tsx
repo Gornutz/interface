@@ -93,7 +93,7 @@ export default function Dropdown({ className }: any) {
         />
       </Button>
 
-      <StyledMenu
+      {/* <StyledMenu
         id="demo-customized-menu"
         MenuListProps={{
           'aria-labelledby': 'demo-customized-button',
@@ -119,7 +119,7 @@ export default function Dropdown({ className }: any) {
           <MoreHorizIcon />
           More
         </MenuItem>
-      </StyledMenu>
+      </StyledMenu> */}
     </>
   )
 }
