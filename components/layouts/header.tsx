@@ -4,18 +4,27 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useWidth } from '../../hooks/useWidth'
 import Button from '../UI/Button/Button'
-import CustomButton from '../UI/customButton/customButton'
 import Dropdown from '../UI/Dropdown/Dropdown'
 import Text from '../UI/Text/Text'
 import styles from './header.module.scss'
 import Sidebar from './sidebar'
-import WalletPage from './wallet'
+import { connectors } from "../web3/connectors"
+import { Web3Button } from '../web3/Web3Button'
+import { useWeb3React } from "@web3-react/core"
 
 const Header = () => {
+  const {
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active
+  } = useWeb3React();
+
   const [title, setTitle] = useState('Overview')
   const [isEarn, setIsEarn] = useState(false)
   const [isLend, setIsLend] = useState(false)
-  const [isWallet, setWalletToggle] = useState(false)
   const [isOverview, setIsOverview] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -46,9 +55,10 @@ const Header = () => {
     }
   }, [pathName])
 
-  const handleConnectClick = () => {
-    setWalletToggle((prev) => !prev)
-  }
+  // useEffect(() => {
+  //   const provider = window.localStorage.getItem("provider");
+  //   if (provider) activate(connectors[provider]);
+  // }, []);
 
   return (
     <>
@@ -74,18 +84,8 @@ const Header = () => {
             />
 
             <Dropdown className={'flex-1'}></Dropdown>
-            {isOverview && (
-              <Button type="button" className="bg-white-01">
-                <span className={`mr-3`}>100.54 ETH</span>{' '}
-                <span> 0x575...A57D</span>
-              </Button>
-            )}
-            {(isEarn || isLend) && (
-              <CustomButton
-                title="Connect Wallet"
-                handleButtonClick={handleConnectClick}
-              />
-            )}
+
+            <Web3Button />
           </div>
         </header>
       )}
@@ -135,9 +135,6 @@ const Header = () => {
             </div>
           </div>
         </>
-      )}
-      {isWallet && (
-        <WalletPage isOpen={isWallet} handleCloseWallet={handleConnectClick} />
       )}
     </>
   )
