@@ -166,7 +166,7 @@ const Earn: NextPage = () => {
       {value == 1 && <div></div>}
 
       {width <= 680 ? (
-        <AvailableFaultMobile strategiesTable={strategiesTable || []} />
+        <AvailableFaultMobile strategiesTable={strategiesTable || []} onBtnNewClick={newPositionOpenHandler} />
       ) : (
         <div className="mt-10 pb-40">
           <table className={styles.table_bottom}>

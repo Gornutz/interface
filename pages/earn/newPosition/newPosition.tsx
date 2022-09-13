@@ -46,7 +46,7 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
       </div>
       <div className={`mt-5 ${Style.chooseContainer}`}>
         <div className={Style["chooseContainer-content"]}>
-          <label>Choose Collateral</label>
+          <p className={Style.label}>Choose Collateral</p>
           <FormControl>
             <RadioGroup
               row
@@ -55,47 +55,50 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
               value={collateral}
               onChange={handleCollateralChange}
             >
-              <FormControlLabel
-                value="ICHI"
-                color="secondary"
-                control={<Radio sx={{
-                  color: '#fff',
-                  '&.Mui-checked': {
-                    color: '#05A06B',
-                    'svg:first-of-type': {
-                      color: '#fff'
-                    }
-                  },
-                }}/>}
-                label={<span style={{color: collateral == "ICHI" ? "#fff" : "#8D97A0"}}>ICHI</span>}
-              />
-              <input type="text" className={collateral == "ICHI" ? "" : Style.inputDisabled} onClick={() => setCollateral("ICHI")} />
+              <div>
+                <FormControlLabel
+                  value="ICHI"
+                  color="secondary"
+                  control={<Radio sx={{
+                    color: '#fff',
+                    '&.Mui-checked': {
+                      color: '#05A06B',
+                      'svg:first-of-type': {
+                        color: '#fff'
+                      }
+                    },
+                  }}/>}
+                  label={<p style={{color: collateral == "ICHI" ? "#fff" : "#8D97A0", width: '42px'}}>ICHI</p>}
+                />
+                <input type="text" className={collateral == "ICHI" ? "" : Style.inputDisabled} onClick={() => setCollateral("ICHI")} />
+              </div>
 
-              <FormControlLabel
-                value="USDC"
-                color="secondary"
-                control={<Radio sx={{
-                  color: '#fff',
-                  marginLeft: '10px',
-                  '&.Mui-checked': {
-                    color: '#05A06B',
-                    'svg:first-of-type': {
-                      color: '#fff'
-                    }
-                  },
-                }}/>}
-                label={<span style={{color: collateral == "USDC" ? "#fff" : "#8D97A0"}}>USDC</span>}
-              />
-              <input type="text" className={collateral == "USDC" ? "" : Style.inputDisabled} onClick={() => setCollateral("USDC")} />
+              <div className={Style.formControl}>
+                <FormControlLabel
+                  value="USDC"
+                  color="secondary"
+                  control={<Radio sx={{
+                    color: '#fff',
+                    '&.Mui-checked': {
+                      color: '#05A06B',
+                      'svg:first-of-type': {
+                        color: '#fff'
+                      }
+                    },
+                  }}/>}
+                  label={<p style={{color: collateral == "USDC" ? "#fff" : "#8D97A0", width: '42px'}}>USDC</p>}
+                />
+                <input type="text" className={collateral == "USDC" ? "" : Style.inputDisabled} onClick={() => setCollateral("USDC")} />
+              </div>
             </RadioGroup>
           </FormControl>
         </div>
         <div className={` ${Style.chooseSubContainer}`}></div>
 
         <div className={Style["chooseContainer-content"]}>
-          <label className={` ${Style.chooseSubContainerLabel}`}>
+          <p className={`${Style.label} ${Style.chooseSubContainerLabel}`}>
             Choose Leverage
-          </label>
+          </p>
           {
             collateral == "USDC" ? (
               <LeverageSlider
@@ -148,7 +151,7 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
         <ul className={Style.list}>
           <li>
             <span>Total Position Value</span>{" "}
-            <span className={Style.bold}>$900 ($630 ICHI / $270 USDC)</span>
+            <p className={Style.bold}>$900 ($630 ICHI / $270 USDC)</p>
           </li>
           <li>
             <span>Borrowing</span>{" "}

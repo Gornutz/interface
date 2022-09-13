@@ -59,6 +59,9 @@ const Header = () => {
   //   const provider = window.localStorage.getItem("provider");
   //   if (provider) activate(connectors[provider]);
   // }, []);
+  const handleSidebarClick = (value: string) => {
+    setOpen(false)
+  }
 
   return (
     <>
@@ -130,7 +133,7 @@ const Header = () => {
           >
             <div className={`${styles.mobileNavbarContainer} h-[90px]`}>
               <div className="flex flex-col ml-4 h-full">
-                <Sidebar />
+                <Sidebar handleSidebarClick={handleSidebarClick}/>
               </div>
             </div>
           </div>

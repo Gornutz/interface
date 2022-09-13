@@ -11,9 +11,12 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const width = useWidth();
 
+  const handleSidebarClick = (value: string) => {
+  }
+
   return (
     <div className="min-h-screen bg-[#1E1E1E] flex flex-col md:flex-row flex-1">
-      {width >680 ? <Sidebar /> :<></>}
+      {width > 680 ? <Sidebar handleSidebarClick={handleSidebarClick}/> :<></>}
       <div className="flex bg-main flex-col flex-1">
         <Header />
         <div className={styles.bottomContainer}>

@@ -93,7 +93,7 @@ export default function LeverageSlider({
     setValue1(1.25)
   }, [marks, max, realMax])
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: '100%' }}>
       <IOSSlider
         track={false}
         aria-label="ios slider"

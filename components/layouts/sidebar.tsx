@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useWidth } from '../../hooks/useWidth'
 import styles from './layout.module.scss'
 
-const Sidebar = () => {
+const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => void}) => {
   const router = useRouter()
   const pathName = router.pathname
   const width = useWidth()
@@ -41,6 +41,7 @@ const Sidebar = () => {
   }, [pathName])
 
   const activeRoute = (route: string) => {
+    handleSidebarClick?.(route)
     let _routes = [...menuItems]
     _routes = _routes.map((item) => {
       return {

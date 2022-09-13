@@ -23,7 +23,7 @@ const Popup = ({
         <div>
             <Dialog
                 open={isOpen}
-                 onClose={handleClosePopup}
+                onClose={handleClosePopup}
                 fullScreen={isFullScreen}
                 aria-describedby="alert-dialog-slide-description"
                 className={Style.dialog}

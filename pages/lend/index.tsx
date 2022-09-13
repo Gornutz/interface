@@ -60,6 +60,9 @@ const Earn: NextPage = () => {
   const handleSuccessPosition = (value: string) => {
     closeDepositModal()
   }
+  const handleMobileDeposit = (value: string) => {
+    setDepositDlgOpen(true)
+  }
   return (
     <div className={`${width <= 680 ? 'h-fit' : 'h-full'} items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block`}>
       <div className={styles.topContainer}>
@@ -146,7 +149,7 @@ const Earn: NextPage = () => {
       {value == 1 && <div></div>}
 
       {width <= 680 ? (
-        <MobileTableLend tableData={tableData || []} />
+        <MobileTableLend tableData={tableData || []} onBtnNewClick={handleMobileDeposit} />
       ) : (
         <div className="mt-10 pb-40">
           <table className={styles.table_bottom}>

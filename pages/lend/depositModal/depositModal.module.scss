@@ -51,6 +51,9 @@
       align-items: center;
       column-gap: 25px;
       margin-top: 20px;
+      @media (max-width: 680px) {
+        column-gap: 15px;
+      }
   
       label {
         font-size: 12px;
@@ -95,6 +98,10 @@
     padding: 25px 5px;
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 680px) {
+      display: block;
+    }
     .list {
       width: 50%;
       list-style: unstyled;
@@ -121,6 +128,10 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 20px;
       padding: 20px;
+      @media (max-width: 680px) {
+        width: 80%;
+        margin-top: 20px;
+      }
   
       h6 {
         font-weight: 400;

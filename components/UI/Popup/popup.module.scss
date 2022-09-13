@@ -72,5 +72,9 @@
   .content {
     padding: 1.5rem;
     padding-top: 0;
+
+    @media (max-width: 425px) {
+      padding: 0.5rem;
+    }
   }
 }
