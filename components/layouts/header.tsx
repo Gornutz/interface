@@ -8,19 +8,9 @@ import Dropdown from '../UI/Dropdown/Dropdown'
 import Text from '../UI/Text/Text'
 import styles from './header.module.scss'
 import Sidebar from './sidebar'
-import { connectors } from "../web3/connectors"
 import { Web3Button } from '../web3/Web3Button'
-import { useWeb3React } from "@web3-react/core"
 
 const Header = () => {
-  const {
-    library,
-    chainId,
-    account,
-    activate,
-    deactivate,
-    active
-  } = useWeb3React();
 
   const [title, setTitle] = useState('Overview')
   const [isEarn, setIsEarn] = useState(false)
@@ -55,10 +45,6 @@ const Header = () => {
     }
   }, [pathName])
 
-  // useEffect(() => {
-  //   const provider = window.localStorage.getItem("provider");
-  //   if (provider) activate(connectors[provider]);
-  // }, []);
   const handleSidebarClick = (value: string) => {
     setOpen(false)
   }
@@ -67,7 +53,7 @@ const Header = () => {
     <>
       {width > 680 && (
         <header className="md:h-[90px] md:flex items-center md:px-16 sm:px-1 2sm:px0 sm:h-[150px] sm:block">
-          <Text>
+          <Text >
             {' '}
             <h3>{title}</h3>
           </Text>
@@ -132,7 +118,7 @@ const Header = () => {
             } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
           >
             <div className={`${styles.mobileNavbarContainer} h-[90px]`}>
-              <div className="flex flex-col ml-4 h-full">
+              <div className="flex flex-col h-full">
                 <Sidebar handleSidebarClick={handleSidebarClick}/>
               </div>
             </div>

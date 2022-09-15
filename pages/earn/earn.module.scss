@@ -9,7 +9,6 @@
     row-gap: 30px;
   }
   .heading {
-    color: white;
     font-size: 16px;
   }
   .text {
@@ -31,7 +30,6 @@
       align-items: flex-start;
     }
     .title {
-      color: white;
       text-align: end;
       font-size: 18px;
       @include for-size(phone-only) {
@@ -47,8 +45,13 @@
 }
 .divider {
   height: 2px;
-  background: rgba(255, 255, 255, 0.1);
   width: 100%;
+}
+.dividerDark {
+  background: rgba(255, 255, 255, 0.1);
+}
+.dividerLight {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .table_bottom {
@@ -70,11 +73,8 @@
     text-align: center;
   }
   .tbody {
+    
     td {
-      //   background: rgba(255, 255, 255, 0.05);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      color: white;
       font-size: 14px;
       padding: 1rem;
       @include for-size(phone-only) {

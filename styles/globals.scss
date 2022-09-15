@@ -51,12 +51,11 @@ a {
 } */
 }
 
-.bg-main {
+.bg-main-dark {
   background: linear-gradient(118.56deg, #0f2337 0%, #003d4a 100%);
-
-  /* @include devices(mobile) {
-    padding: 1.5em;
-  } */
+}
+.bg-main-light {
+  background-color: #fff;
 }
 
 .net-pay-box {
@@ -91,7 +90,7 @@ header {
 }
 
 .side-bottom h5 {
-  color: #ffffff;
+  // color: #ffffff;
   line-height: 24px;
 }
 

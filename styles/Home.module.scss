@@ -135,7 +135,6 @@
 }
 
 .start-farming-widget {
-  background-color: rgba(255, 255, 255, 5%);
   display: flex;
   align-items: center;
   place-content: space-between;
@@ -149,7 +148,6 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 29px;
-  color: #ffffff;
   max-width: 65%;
 
   @include for-size(phone-only) {
@@ -168,12 +166,10 @@
       flex-direction: column;
       margin-left: -1rem;
       .title {
-        color: white;
         font-weight: 500;
         font-size: 13px;
       }
       .subTitle {
-        color: white;
         font-weight: 400;
         margin-top: 0.3rem;
         font-size: 11px;
@@ -227,18 +223,15 @@
 
   .percentage {
     margin-left: 1rem;
-    color: #ffffff;
     margin-top: 1rem;
     font-size: 12px;
   }
 }
 .lendingRowTitle {
-  color: white;
   margin-top: 1rem;
   font-size: 1.8em;
 }
 .percentage {
-  color: white;
   font-weight: 500;
   font-size: 1.8em;
   margin-left: 2rem;

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import TableGridItem from './TableGridItem'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import ProgressBar1 from '../ProgressBar/ProgressBar1'
+import { useTheme } from '@mui/material/styles'
 
 // const columns = {
 //     CurrentStrategy =
@@ -15,6 +16,7 @@ import ProgressBar1 from '../ProgressBar/ProgressBar1'
 // }]
 
 const TableGrid = ({ newPositionOpenHandler }) => {
+  const theme = useTheme()
   return (
     <>
       <div>{/* header  */}</div>
@@ -29,7 +31,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
             <th>Equity Value</th>
           </tr>
         </thead>
-        <tbody className={styles.tbody}>
+        <tbody className={`${styles.tbody} ${theme.palette.mode === 'light' ?'bg-black/[0.1]' : 'bg-white/[0.05]'}`}>
           <tr
             onClick={(event) => newPositionOpenHandler('your-position')}
             className="cursor-pointer"
@@ -73,7 +75,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
           </tr>
           <tr
             onClick={(event) => newPositionOpenHandler('your-position')}
-            className={` ${styles.bottom} ${styles.rowBottom} cursor-pointer`}
+            className={`border-b-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'} ${styles.rowBottom} cursor-pointer`}
           >
             <td>
               <span>Strategy Health: 50%</span>
@@ -118,7 +120,7 @@ const TableGrid = ({ newPositionOpenHandler }) => {
 
           <tr
             onClick={(event) => newPositionOpenHandler('your-position')}
-            className={` ${styles.bottom} ${styles.rowBottom} cursor-pointer`}
+            className={`border-b-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'} ${styles.rowBottom} cursor-pointer`}
           >
             <td>
               <span>Strategy Health: 75%</span>

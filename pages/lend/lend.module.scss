@@ -11,7 +11,6 @@
   }
 
   .heading {
-    color: white;
     font-size: 16px;
   }
   .text {
@@ -50,13 +49,11 @@
       }
     }
     .btnSearch {
-      background: rgba(255, 255, 255, 0.1);
       border-radius: 14px;
       width: 400px;
       height: 34px;
       padding: 10px 20px;
       outline: none;
-      color: #fff;
       @media (max-width: 680px) {
         width: 100%;
       }
@@ -71,8 +68,13 @@
 }
 .divider {
   height: 2px;
-  background: rgba(255, 255, 255, 0.1);
   width: 100%;
+}
+.dividerDark {
+  background: rgba(255, 255, 255, 0.1);
+}
+.dividerLight {
+  background: rgba(0, 0, 0, 0.1);
 }
 .table {
   margin-top: 1rem;
@@ -88,7 +90,6 @@
     vertical-align: top;
     td {
       background: rgba(255, 255, 255, 0.05);
-      color: white;
       padding: 2rem;
       @include for-size(phone-only) {
         font-size: 0.8em;
@@ -194,11 +195,7 @@
   .tbody {
     vertical-align: middle;
     td {
-      //   background: rgba(255, 255, 255, 0.05);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      color: white;
-      padding: 1rem;
+      padding: 0.5rem;
       @include for-size(phone-only) {
         font-size: 0.8em;
       }

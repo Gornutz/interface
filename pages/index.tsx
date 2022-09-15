@@ -13,12 +13,15 @@ import Popup from '../components/UI/Popup/popup';
 import YourPosition from './earn/yourPosition/yourPosition';
 import ClosePosition from './earn/closePosition/closePosition'
 import EditPosition from './earn/editPosition/editPosition'
+import { Web3Button } from '../components/web3/Web3Button'
+import { useTheme } from '@mui/material/styles'
 
 const Home: NextPage = () => {
   const [YourPosOpen, setYourPosition] = useState(false)
   const [ClosePos, setClosePosition] = useState(false)
   const [EditPosOpen, setEditPosition] = useState(false)
-  const width = useWidth();
+  const width = useWidth()
+  const theme = useTheme()
 
   const handleClosepositionPopup = (value: string) => {
     setYourPosition(false)
@@ -69,9 +72,7 @@ const Home: NextPage = () => {
             />
 
             <Dropdown className={"flex-1"}/>
-            <Button type="button" className="bg-white-01">
-                <span className={`mr-3`}>100.54 ETH</span>{' '}
-              </Button>
+            <Web3Button />
            
           </div>
         </header>
@@ -80,7 +81,7 @@ const Home: NextPage = () => {
         <div
           className={
             styles["start-farming-widget"] +
-            " my-8 rounded-lg px-8 1sm:block py-5"
+            ` my-8 rounded-lg px-8 1sm:block py-5 ${theme.palette.mode === 'light' ? 'bg-black/[0.05]':'bg-white/[0.05]'}`
           }
         >
           <div className={styles.topContainer}>
@@ -100,21 +101,21 @@ const Home: NextPage = () => {
           <CustomButton buttonStyle={`${width <= 768 && 'w-full'}`} title={"Start Earning"} handleButtonClick={() => { }} />
         </div>
         <div className="md:flex gap-8 flex-row my-8 sm:block 2sm:block">
-          <div className="net-pay-box basis-1/2 px-6 py-8 ">
+          <div className={`basis-1/2 px-6 py-8 border-b-4 ${theme.palette.mode === 'light' ? 'border-black/[0.1]' : 'border-white/[0.05]'}`}>
             <span className=" small-label">Net Worth</span>
             <Text>
               {" "}
               <h3>$500,000.00 USD</h3>
             </Text>
           </div>
-          <div className=" net-pay-box basis-1/2 px-6 pl-8 py-8 ">
+          <div className={`basis-1/2 px-6 pl-8 py-8 border-b-4 ${theme.palette.mode === 'light' ? 'border-black/[0.1]' : 'border-white/[0.05]'}`}>
             <span className="small-label">Net APY%</span>
             <Text>
               {" "}
               <h3>Net APY %</h3>
             </Text>
           </div>
-          <div className=" net-pay-box basis-1/2 px-6 pl-8 py-8 ">
+          <div className={`basis-1/2 px-6 pl-8 py-8 border-b-4 ${theme.palette.mode === 'light' ? 'border-black/[0.1]' : 'border-white/[0.05]'}`}>
             <span className="small-label">Projected Weekly Earnings</span>
             <Text>
               {" "}

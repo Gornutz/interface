@@ -18,6 +18,7 @@ import { connectors } from "./connectors";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Web3Provider } from '@ethersproject/providers'
+import { useWidth } from '../../hooks/useWidth'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   // backgroundColor: 'rgb(0 0 0 / 80%)',
@@ -328,6 +329,7 @@ export function Web3Button() {
     deactivate()
     setOpenConnectDlg(true)
   }
+  const width = useWidth()
 
   useEffect(() => {
     if(active && account){
@@ -344,7 +346,7 @@ export function Web3Button() {
         active ? (
           <DisconnectButton balance={ethBalance} showConnectDlg={handleShowConnectDlg}/>
         ) : (
-          <ConnectButton title={"Connect Wallet"} openConnectDlg={openConnectDlg}/>
+          <ConnectButton title={width < 680 ? "Connect" : 'Connect Wallet'} openConnectDlg={openConnectDlg}/>
         )
       }
     </>

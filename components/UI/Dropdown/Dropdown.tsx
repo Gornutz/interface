@@ -10,6 +10,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import Image from 'next/image'
 import Button from '../Button/Button'
+import { useTheme } from '@mui/material/styles'
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -55,6 +56,7 @@ const StyledMenu = styled((props: MenuProps) => (
 }))
 
 export default function Dropdown({ className }: any) {
+  const theme = useTheme()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -68,7 +70,7 @@ export default function Dropdown({ className }: any) {
     <>
       <Button
         type="button"
-        className={`bg-white-01 ${className}`}
+        className={`${theme.palette.mode === 'light' ? 'bg-slate-200' : 'bg-white-01'} ${className}`}
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"

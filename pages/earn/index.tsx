@@ -18,6 +18,8 @@ import Dropdown from '../../components/UI/Dropdown/Dropdown'
 import Text from '../../components/UI/Text/Text'
 import { useWidth } from '../../hooks/useWidth'
 import AvailableFaultMobile from './availableFaultMobile/availableFaultMobile'
+import { Web3Button } from '../../components/web3/Web3Button'
+import { useTheme } from '@mui/material/styles'
 
 const strategiesTable = [
   {
@@ -58,6 +60,7 @@ const Earn: NextPage = () => {
   const [EditPosOpen, setEditPosition] = useState(false)
   const [ClosePos, setClosePosition] = useState(false)
   const width = useWidth()
+  const theme = useTheme()
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
@@ -118,7 +121,7 @@ const Earn: NextPage = () => {
             />
 
             <Dropdown className={'flex-1'} />
-            <CustomButton title="Connect " handleButtonClick={() => {}} />
+            <Web3Button />
           </div>
         </header>
       )}
@@ -146,20 +149,20 @@ const Earn: NextPage = () => {
       >
         <Tab
           label={
-            <span style={{ color: value === 0 ? '#19857b' : 'white' }}>
+            <span style={{ color: value === 0 ? '#19857b' : (theme.palette.mode === 'light' ? '#000' : '#fff') }}>
               Active Positions
             </span>
           }
         />
         <Tab
           label={
-            <span style={{ color: value === 1 ? '#19857b' : 'white' }}>
+            <span style={{ color: value === 1 ? '#19857b' : (theme.palette.mode === 'light' ? '#000' : '#fff') }}>
               Liquidated Positions
             </span>
           }
         />
       </Tabs>
-      <div className={styles.divider}></div>
+      <div className={`${theme.palette.mode === 'light' ? styles.dividerLight : styles.dividerDark} ${styles.divider}`}></div>
       {value == 0 && (
         <TableGrid newPositionOpenHandler={newPositionOpenHandler}></TableGrid>
       )}
@@ -183,10 +186,10 @@ const Earn: NextPage = () => {
                 <td className={styles.tHeading}></td>
               </tr>
             </thead>
-            <tbody className={styles.tbody}>
+            <tbody className={`${styles.tbody}`}>
               {strategiesTable.map((row) => {
                 return (
-                  <tr key={row.id}>
+                  <tr key={row.id} className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
                     <td className={styles.columnRoundLeft}>
                       <div className={styles.tableCol}>
                         <Image

@@ -1,35 +1,40 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useWidth } from '../../hooks/useWidth'
 import styles from './layout.module.scss'
+import ColorModeContext from '../../context/ColorModeContext'
+import IconButton from '@mui/material/IconButton'
+import { useTheme } from '@mui/material/styles'
 
 const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => void}) => {
   const router = useRouter()
   const pathName = router.pathname
   const width = useWidth()
+  const colorMode = useContext(ColorModeContext)
+  const theme = useTheme()
 
   const [menuItems, setMenuItems] = useState([
     {
       href: '/',
       title: 'Overview',
-      icon: <Image src={'/icons/overview.svg'} width={40} height={40} />,
+      icon: <Image src={'/icons/overview.svg'} width={25} height={25} />,
       selectedIcon: '/icons/selectedOverview.svg',
       isSelected: false,
     },
     {
       href: '/earn',
       title: 'Earn',
-      icon: <Image src={'/icons/lend.svg'} width={40} height={40} />,
-      selectedIcon: '/icons/selectedLend.svg',
+      icon: <Image src={'/icons/earn.svg'} width={25} height={25} />,
+      selectedIcon: '/icons/selectedEarn.svg',
       isSelected: false,
     },
     {
       href: '/lend',
       title: 'Lend',
-      icon: <Image src={'/icons/earn.svg'} width={40} height={40} />,
-      selectedIcon: '/icons/selectedEarn.svg',
+      icon: <Image src={'/icons/lend.svg'} width={25} height={25} />,
+      selectedIcon: '/icons/selectedLend.svg',
       isSelected: false,
     },
   ])
@@ -53,7 +58,7 @@ const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => voi
   }
 
   return (
-    <aside className="sidebar sticky top-0 h-screen bg-[#001223]">
+    <aside className={`sidebar sticky top-0 h-screen ${theme.palette.mode === 'light' ? 'bg-slate-200' : 'bg-[#001223]'} `}>
       <div
         className={`flex items-center justify-center ${
           width > 680 ? 'h-[90px]' : ''
@@ -88,13 +93,13 @@ const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => voi
                     <Image
                       src={selectedIcon}
                       alt={title}
-                      width={44}
-                      height={44}
+                      width={27}
+                      height={27}
                     />
                   ) : (
                     icon
                   )}
-                  <span className="text-xs">{title}</span>
+                  <span className={`text-xs ${theme.palette.mode === 'light' ? 'text-[#000]' : 'text-[#ffffff59]'}`}>{title}</span>
                 </a>
               </Link>
             </li>
@@ -102,6 +107,24 @@ const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => voi
         </ul>
       </nav>
       <div className="side-bottom px-1">
+        <div className='flex justify-center'>
+          <IconButton
+            sx={{  }}
+            onClick={colorMode.toggleColorMode}
+            color="inherit"
+          >
+            <Image
+              src={
+                theme.palette.mode === 'light'
+                  ? '/icons/crescent.svg'
+                  : '/icons/sun.svg'
+              }
+              alt=""
+              width={34}
+              height={34}
+            />
+          </IconButton>
+        </div>
         <h5 className="py-2 flex place-content-center	w-full	text-xs	 ">
           Join Us
         </h5>
@@ -109,7 +132,7 @@ const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => voi
           <Link href={"https://twitter.com/BLBprotocol/"}>
             <a>
               <Image
-                src="/icons/twitter.svg"
+                src="/social/twitter.svg"
                 alt="twitter"
                 width={20}
                 height={18}
@@ -121,7 +144,7 @@ const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => voi
           <Link href={"https://discord.com/invite/VJAPVjy5uk"}>
             <a>
               <Image
-                src="/icons/discord.svg"
+                src="/social/discord.svg"
                 alt="discord"
                 width={20}
                 height={18}
@@ -133,7 +156,7 @@ const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => voi
           <Link href={"https://github.com/Blueberryfi"}>
             <a>
               <Image
-                src="/icons/git.svg"
+                src={theme.palette.mode === 'light' ? "/social/github-dark.svg" : '/social/github-light.svg'}
                 alt="github"
                 width={20}
                 height={18}
@@ -145,7 +168,7 @@ const Sidebar = ({handleSidebarClick}:{handleSidebarClick: (value:string) => voi
           <Link href={"https://medium.com/@blueberryprotocol"}>
             <a>
               <Image
-                src="/icons/m_icon.svg"
+                src={theme.palette.mode === 'light' ? "/social/medium-dark.svg" : '/social/medium-light.svg'}
                 alt="medium"
                 width={20}
                 height={18}
