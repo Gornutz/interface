@@ -268,7 +268,7 @@ const DisconnectButton = ({ showConnectDlg, balance }: DisconnectProps) => {
             <div className='flex flex-col justify-center gap-4'>
               <div className='flex items-center gap-4'>
                 <div className='overflow-hidden rounded-full'>
-                  <Image src={'/icons/home.svg'} width={50} height={50} />
+                  <Image src={'/icons/home.svg'} width={50} height={50} alt={""} />
                 </div>
                 <div className='text-lg leading-6 font-bold text-white'>
                   {account.substring(0, 6) + "..." + account.substring(account.length - 4)}

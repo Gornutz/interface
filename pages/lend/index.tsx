@@ -2,8 +2,6 @@ import { Tabs, Tab } from '@mui/material'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useState } from 'react'
-import Button from '../../components/UI/Button/Button'
-import Card from '../../components/UI/Card/Card'
 import CustomButton from '../../components/UI/customButton/customButton'
 import { useWidth } from '../../hooks/useWidth'
 import styles from './lend.module.scss'
@@ -129,50 +127,6 @@ const Earn: NextPage = () => {
       <div className={`${theme.palette.mode === 'light' ? styles.dividerLight : styles.dividerDark} ${styles.divider}`}></div>
       {value == 0 && (
         <TableGrid />
-        // <table className={styles.table}>
-        //   <thead className={styles.header}>
-        //     <tr>
-        //       <td className={styles.tHeading}>Pool</td>
-        //       <td className={styles.tHeading}>APY % (Weekly Earnings)</td>
-        //       <td className={styles.tHeading}></td>
-        //       <td className={styles.tHeading}></td>
-        //       <td className={styles.tHeading}>Your Position</td>
-        //     </tr>
-        //   </thead>
-        //   <tbody className={`${styles.tbody} ${theme.palette.mode === 'light' ?'bg-black/[0.1]' : 'bg-white/[0.05]'}`}>
-        //     <tr className={`border-b-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
-        //       <td className={styles.columnRoundLeft}>
-        //         <div className={styles.tableCol}>
-        //           <Image src="/icons/pic.svg" width={30} height={30} />
-        //           <span style={{ paddingLeft: '0.7rem' }}>ICHI</span>
-        //         </div>
-        //       </td>
-        //       <td>12% <span className={styles.smallAPYText}>($576)</span></td>
-        //       <td></td>
-        //       <td></td>
-        //       <td>
-        //         <p>250,0000 ICHI</p>
-        //         <p className={styles.smallPositionText}>$2,500,000 USD</p>
-        //       </td>
-        //     </tr>
-
-        //     <tr>
-        //       <td>
-        //         <div className={styles.tableCol}>
-        //           <Image src="/icons/pic1.svg" width={30} height={30} />
-        //           <span style={{ paddingLeft: '0.7rem' }}>oneICHI</span>
-        //         </div>
-        //       </td>
-        //       <td>12% <span className={styles.smallAPYText}>($576)</span></td>
-        //       <td></td>
-        //       <td></td>
-        //       <td>
-        //         <p>250,0000 oneICHI</p>
-        //         <p className={styles.smallPositionText}>$2,500,000 USD</p>
-        //       </td>
-        //     </tr>
-        //   </tbody>
-        // </table>
       )}
       {value == 1 && <div></div>}
 
@@ -197,7 +151,7 @@ const Earn: NextPage = () => {
               <tr className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
                 <td className={styles.columnRoundLeft}>
                   <div className={styles.tableCol}>
-                    <Image src="/icons/pic.svg" width={30} height={30} />
+                    <Image src="/icons/pic.svg" width={30} height={30} alt={"ICHI"}/>
                     <span style={{ paddingLeft: '0.7rem' }}>ICHI</span>
                   </div>
                 </td>
@@ -227,7 +181,7 @@ const Earn: NextPage = () => {
               <tr className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
                 <td className={styles.columnRoundLeft}>
                   <div className={styles.tableCol}>
-                    <Image src="/icons/pic1.svg" width={30} height={30} />
+                    <Image src="/icons/pic1.svg" width={30} height={30} alt={"oneICHI"}/>
                     <span style={{ paddingLeft: '0.7rem' }}>oneICHI</span>
                   </div>
                 </td>
@@ -257,7 +211,7 @@ const Earn: NextPage = () => {
               <tr className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
                 <td className={styles.columnRoundLeft}>
                   <div className={styles.tableCol}>
-                    <Image src="/icons/pic.svg" width={30} height={30} />
+                    <Image src="/icons/pic.svg" width={30} height={30} alt={"USDC"}/>
                     <span style={{ paddingLeft: '0.7rem' }}>USDC</span>
                   </div>
                 </td>

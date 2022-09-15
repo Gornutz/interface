@@ -1,12 +1,9 @@
 import {
   FormControl,
   FormControlLabel,
-  FormLabel,
   Radio,
   RadioGroup,
-  Slider,
 } from "@mui/material";
-import Button from "../../../components/UI/Button/Button";
 import Style from "./newPosition.module.scss";
 import LeverageSlider from "./LeverageSlider";
 import { useState } from "react";

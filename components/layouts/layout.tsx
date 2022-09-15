@@ -17,9 +17,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row flex-1">
+    <div className={`min-h-screen flex flex-col md:flex-row flex-1`} style={{color: theme.palette.primary.contrastText}}>
       {width > 680 ? <Sidebar handleSidebarClick={handleSidebarClick}/> :<></>}
-      <div className={`flex flex-col flex-1 ${theme.palette.mode === 'light' ? 'bg-main-light' : 'bg-main-dark'}`}>
+      <div className={`flex flex-col flex-1 ${theme.palette.mode === 'light' ? '' : 'bg-main-dark'}`} style={{backgroundColor: theme.palette.primary.main}}>
         <Header />
         <div className={styles.bottomContainer}>
           <main className={styles.rightLayout}>{children}</main>

@@ -1,12 +1,3 @@
-import {
-    FormControl,
-    FormControlLabel,
-    FormLabel,
-    Radio,
-    RadioGroup,
-    Slider,
-} from "@mui/material";
-
 interface DepositModalProps {
   tokenName: string,
   handleButtonClick: (value:string) => void,

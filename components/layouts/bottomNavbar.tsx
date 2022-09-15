@@ -11,22 +11,22 @@ const BottomNavbar = ({}) => {
     {
       href: '/',
       title: 'Overview',
-      icon: <Image src={'/icons/overview.svg'} width={40} height={40} />,
+      icon: <Image src={'/icons/overview.svg'} width={40} height={40} alt={"Overview"}/>,
       selectedIcon: '/icons/selectedOverview.svg',
       isSelected: false,
     },
     {
       href: '/earn',
       title: 'Earn',
-      icon: <Image src={'/icons/lend.svg'} width={40} height={40} />,
-      selectedIcon: '/icons/selectedLend.svg',
+      icon: <Image src={'/icons/earn.svg'} width={40} height={40} alt={"Earn"} />,
+      selectedIcon: '/icons/selectedEarn.svg',
       isSelected: false,
     },
     {
       href: '/lend',
       title: 'Lend',
-      icon: <Image src={'/icons/earn.svg'} width={40} height={40} />,
-      selectedIcon: '/icons/selectedEarn.svg',
+      icon: <Image src={'/icons/lend.svg'} width={40} height={40} alt={"Lend"} />,
+      selectedIcon: '/icons/selectedLend.svg',
       isSelected: false,
     },
   ])
@@ -64,7 +64,7 @@ const BottomNavbar = ({}) => {
               className={`${Style.navItem}`}
               icon={
                 item.isSelected ? (
-                  <Image src={item.selectedIcon} width={44} height={44} />
+                  <Image src={item.selectedIcon} width={44} height={44} alt={""} />
                 ) : (
                   item.icon
                 )

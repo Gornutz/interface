@@ -11,7 +11,6 @@ import lightTheme from '../theme/theme';
 import darkTheme from '../theme/darkTheme';
 import Layout from '../components/layouts/layout'
 import { AppContextProvider } from '../context/AppContext'
-import { ToastContainer } from 'react-toastify'
 import { Web3ReactProvider } from '@web3-react/core'
 import { Web3Provider } from "@ethersproject/providers"
 

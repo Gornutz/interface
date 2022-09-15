@@ -4,11 +4,9 @@ import Image from "next/image";
 import styles from "../styles/Home.module.scss";
 import Card from "../components/UI/Card/Card";
 import Text from "../components/UI/Text/Text";
-import Graph from "../components/UI/Graph/Graph";
 import CustomButton from "../components/UI/customButton/customButton";
 import { useWidth } from "../hooks/useWidth";
 import Dropdown from "../components/UI/Dropdown/Dropdown";
-import Button from "../components/UI/Button/Button";
 import Popup from '../components/UI/Popup/popup';
 import YourPosition from './earn/yourPosition/yourPosition';
 import ClosePosition from './earn/closePosition/closePosition'

@@ -1,6 +1,5 @@
 import styles from './TableGrid.module.scss'
 import Image from 'next/image'
-import { useState } from 'react'
 import { useTheme } from '@mui/material/styles'
 
 const TableGrid = () => {

@@ -3,10 +3,8 @@ import { useState } from "react"
 import {
   FormControl,
   FormControlLabel,
-  FormLabel,
   Radio,
   RadioGroup,
-  Slider,
 } from "@mui/material"
 
 const EditPosition = ({handleClose}) => {

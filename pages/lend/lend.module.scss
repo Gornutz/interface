@@ -27,7 +27,7 @@
   }
   .rightContainer {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
 
     @media (max-width: 680px) {
       width: 100%;
