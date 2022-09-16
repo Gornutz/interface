@@ -71,7 +71,7 @@ const Header = () => {
                 <h4>LTV $000,000.00</h4>
               </Text>
             )}
-            <IconButton
+            {/* <IconButton
               sx={{ marginRight: '10px' }}
               onClick={colorMode.toggleColorMode}
               color="inherit"
@@ -86,10 +86,10 @@ const Header = () => {
                 width={34}
                 height={34}
               />
-            </IconButton>
+            </IconButton> */}
             
-            <div className={`rounded-[12px] p-[7px] ${theme.palette.mode === 'light' ? 'bg-[#b6d4db]' : 'bg-[#214554]'}`}>
-              <NotificationsIcon sx={{cursor: 'pointer', fontSize: '1.6rem', color: '#fff'}}/>
+            <div className={`rounded-[12px] p-[7px] ${theme.palette.mode === 'light' ? 'bg-[#e2e8f0]' : 'bg-[#214554]'}`}>
+              <NotificationsIcon sx={{cursor: 'pointer', fontSize: '1.6rem', color: theme.palette.mode === 'light' ? '#0B2845' : '#fff'}}/>
             </div>
             
             {/* <Image
@@ -137,7 +137,7 @@ const Header = () => {
               />
             </div>
 
-            <IconButton
+            {/* <IconButton
               sx={{ marginRight: '10px' }}
               onClick={colorMode.toggleColorMode}
               color="inherit"
@@ -152,7 +152,7 @@ const Header = () => {
                 width={34}
                 height={34}
               />
-            </IconButton>
+            </IconButton> */}
           </div>
           <div
             className={`absolute top-20 left-0 h-screen w-screen  transform ${
