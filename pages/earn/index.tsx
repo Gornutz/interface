@@ -1,56 +1,56 @@
-import { Tabs, Tab } from '@mui/material'
-import type { NextPage } from 'next'
-import Image from 'next/image'
-import { useState } from 'react'
-import Card from '../../components/UI/Card/Card'
-import styles from './earn.module.scss'
-import Popup from '../../components/UI/Popup/popup'
-import NewPosition from './newPosition/newPosition'
-import PositionDetails from './positionDetails/positionDetails'
-import YourPosition from './yourPosition/yourPosition'
-import EditPosition from './editPosition/editPosition'
-import ClosePosition from './closePosition/closePosition'
-import CustomButton from '../../components/UI/customButton/customButton'
-import StrategiesTable from '../../interfaces/strategiesTable'
-import TableGrid from '../../components/UI/TableGrid/TableGrid'
-import Button from '../../components/UI/Button/Button'
-import Dropdown from '../../components/UI/Dropdown/Dropdown'
-import Text from '../../components/UI/Text/Text'
-import { useWidth } from '../../hooks/useWidth'
-import AvailableFaultMobile from './availableFaultMobile/availableFaultMobile'
-import { Web3Button } from '../../components/web3/Web3Button'
-import { useTheme } from '@mui/material/styles'
+import { Tabs, Tab } from "@mui/material";
+import type { NextPage } from "next";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import Card from "../../components/UI/Card/Card";
+import styles from "./earn.module.scss";
+import Popup from "../../components/UI/Popup/popup";
+import NewPosition from "./newPosition/newPosition";
+import PositionDetails from "./positionDetails/positionDetails";
+import YourPosition from "./yourPosition/yourPosition";
+import EditPosition from "./editPosition/editPosition";
+import ClosePosition from "./closePosition/closePosition";
+import CustomButton from "../../components/UI/customButton/customButton";
+import StrategiesTable from "../../interfaces/strategiesTable";
+import TableGrid from "../../components/UI/TableGrid/TableGrid";
+import Button from "../../components/UI/Button/Button";
+import Dropdown from "../../components/UI/Dropdown/Dropdown";
+import Text from "../../components/UI/Text/Text";
+import { useWidth } from "../../hooks/useWidth";
+import AvailableFaultMobile from "./availableFaultMobile/availableFaultMobile";
+import { Web3Button } from "../../components/web3/Web3Button";
+import { useTheme } from "@mui/material/styles";
 
 const strategiesTable = [
   {
     id: 1,
-    name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    name: "ICHI-USDC Vault",
+    tvl: "$4.5 M USD",
+    Stablecoin: "12-40%",
+    Token: "12-20%",
   },
   {
     id: 2,
-    name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    name: "ICHI-USDC Vault",
+    tvl: "$4.5 M USD",
+    Stablecoin: "12-40%",
+    Token: "12-20%",
   },
   {
     id: 3,
-    name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    name: "ICHI-USDC Vault",
+    tvl: "$4.5 M USD",
+    Stablecoin: "12-40%",
+    Token: "12-20%",
   },
   {
     id: 4,
-    name: 'ICHI-USDC Vault',
-    tvl: '$4.5 M USD',
-    Stablecoin: '12-40%',
-    Token: '12-20%',
+    name: "ICHI-USDC Vault",
+    tvl: "$4.5 M USD",
+    Stablecoin: "12-40%",
+    Token: "12-20%",
   },
-] as StrategiesTable[]
+] as StrategiesTable[];
 
 const Earn: NextPage = () => {
   const [value, setValue] = useState(0)
@@ -59,55 +59,78 @@ const Earn: NextPage = () => {
   const [YourPosOpen, setYourPosition] = useState(false)
   const [EditPosOpen, setEditPosition] = useState(false)
   const [ClosePos, setClosePosition] = useState(false)
-  const width = useWidth()
-  const theme = useTheme()
+  const [curPosition, setCurPosition] = useState({
+    owner: '',
+    collToken: '',
+    underlyingToken: '',
+    underlyingAmount: '',
+    underlyingcTokenAmount: '',
+    collId: '',
+    collateralSize: '',
+    debtMap: '',
+    positionId: 0,
+    debtValue: 0
+  })
+
+  const width = useWidth();
+  const theme = useTheme();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
+    setValue(newValue);
+  };
 
   //
+  const yourPositionOpenHandler = (item) => {
+    setCurPosition(item);
+    newPositionOpenHandler("your-position");
+  };
   const newPositionOpenHandler = (title: string) => {
-    console.log(title)
+    console.log(title);
     switch (title) {
-      case 'new-position':
-        setNewPosition(true)
-        break
-      case 'success-position':
-        setSuccesPosition(true)
-        break
-      case 'your-position':
-        setYourPosition(true)
-        break
-      case 'edit-position':
-        setEditPosition(true)
-        break
-      case 'close-position':
-        setClosePosition(true)
-        break
+      case "new-position":
+        setNewPosition(true);
+        break;
+      case "success-position":
+        setSuccesPosition(true);
+        break;
+      case "your-position":
+        setYourPosition(true);
+        break;
+      case "edit-position":
+        setEditPosition(true);
+        break;
+      case "close-position":
+        setClosePosition(true);
+        break;
 
       default:
-        break
+        break;
     }
-  }
+  };
   const handleSuccessPosition = (value: string) => {
-    closeNewPosition()
-    newPositionOpenHandler(value)
-  }
+    console.log("handleSuccessPosition?", value);
+    closeNewPosition();
+    if (value == "success-position") {
+      newPositionOpenHandler(value);
+    }
+  };
   const closeNewPosition = () => {
-    setNewPosition(false)
-  }
+    setNewPosition(false);
+  };
 
   const handleClosepositionPopup = (value: string) => {
-    setYourPosition(false)
-    newPositionOpenHandler(value)
-  }
+    setYourPosition(false);
+    newPositionOpenHandler(value);
+  };
   return (
-    <div className={`${width <= 680 ? 'h-fit' : 'h-full'} items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block`}>
+    <div
+      className={`${width <= 680 ? "h-fit" : "h-full"
+        } items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block`}
+    >
       {width <= 680 && (
         <header className="md:h-[90px] pb-4 md:flex items-center md:px-16 sm:px-1 2sm:px0 sm:h-[150px] sm:block">
           <Text>
-            {' '}
+            {" "}
             <h3>Earn</h3>
           </Text>
 
@@ -120,18 +143,17 @@ const Earn: NextPage = () => {
               className={styles.menuIcon}
             />
 
-            <Dropdown className={'flex-1'} />
+            <Dropdown className={"flex-1"} />
             <Web3Button />
           </div>
         </header>
       )}
       <div className={styles.topContainer}>
         <div>
-          <h4 className={styles.heading}>
-            Vaults
-          </h4>
+          <h4 className={styles.heading}>Vaults</h4>
           <p className={styles.text}>
-            Utilize up to 3x leverage on LP strategies while maintaining your preferred token position as collateral
+            Utilize up to 3x leverage on LP strategies while maintaining your
+            preferred token position as collateral
           </p>
         </div>
         <div className={styles.rightContainer}>
@@ -149,27 +171,55 @@ const Earn: NextPage = () => {
       >
         <Tab
           label={
-            <span style={{ color: value === 0 ? '#19857b' : (theme.palette.mode === 'light' ? '#000' : '#fff') }}>
+            <span
+              style={{
+                color:
+                  value === 0
+                    ? "#19857b"
+                    : theme.palette.mode === "light"
+                      ? "#000"
+                      : "#fff",
+              }}
+            >
               Active Positions
             </span>
           }
         />
         <Tab
           label={
-            <span style={{ color: value === 1 ? '#19857b' : (theme.palette.mode === 'light' ? '#000' : '#fff') }}>
+            <span
+              style={{
+                color:
+                  value === 1
+                    ? "#19857b"
+                    : theme.palette.mode === "light"
+                      ? "#000"
+                      : "#fff",
+              }}
+            >
               Liquidated Positions
             </span>
           }
         />
       </Tabs>
-      <div className={`${theme.palette.mode === 'light' ? styles.dividerLight : styles.dividerDark} ${styles.divider}`}></div>
+      <div
+        className={`${theme.palette.mode === "light"
+            ? styles.dividerLight
+            : styles.dividerDark
+          } ${styles.divider}`}
+      ></div>
       {value == 0 && (
-        <TableGrid newPositionOpenHandler={newPositionOpenHandler}></TableGrid>
+        <TableGrid
+          yourPositionOpenHandler={yourPositionOpenHandler}
+        ></TableGrid>
       )}
       {value == 1 && <div></div>}
 
       {width <= 680 ? (
-        <AvailableFaultMobile strategiesTable={strategiesTable || []} onBtnNewClick={newPositionOpenHandler} />
+        <AvailableFaultMobile
+          strategiesTable={strategiesTable || []}
+          onBtnNewClick={newPositionOpenHandler}
+        />
       ) : (
         <div className="mt-10 pb-40">
           <table className={styles.table_bottom}>
@@ -189,7 +239,13 @@ const Earn: NextPage = () => {
             <tbody className={`${styles.tbody}`}>
               {strategiesTable.map((row) => {
                 return (
-                  <tr key={row.id} className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
+                  <tr
+                    key={row.id}
+                    className={`border-y-[1px] ${theme.palette.mode === "light"
+                        ? "border-black/[0.2]"
+                        : "border-white/[0.1]"
+                      }`}
+                  >
                     <td className={styles.columnRoundLeft}>
                       <div className={styles.tableCol}>
                         <Image
@@ -198,7 +254,7 @@ const Earn: NextPage = () => {
                           height={40}
                           alt="image"
                         />
-                        <span style={{ paddingLeft: '0.7rem' }}>
+                        <span style={{ paddingLeft: "0.7rem" }}>
                           {row.name}
                         </span>
                       </div>
@@ -211,12 +267,12 @@ const Earn: NextPage = () => {
                         title="New Position"
                         buttonStyle={styles.buttonStyle}
                         handleButtonClick={() =>
-                          newPositionOpenHandler('new-position')
+                          newPositionOpenHandler("new-position")
                         }
                       />
                     </td>
                   </tr>
-                )
+                );
               })}
             </tbody>
           </table>
@@ -227,56 +283,61 @@ const Earn: NextPage = () => {
         // onClick={(e) => newPositionOpenHandler('success-position')}
         isOpen={NewOpen}
         handleClose={closeNewPosition}
-        title={'New Position'}
+        title={"New Position"}
       >
         <NewPosition handleButtonClick={handleSuccessPosition} />
       </Popup>
       <Popup
         isOpen={SuccessOpen}
-        title={'Success!'}
+        title={"Success!"}
         handleClose={() => {
-          setSuccesPosition(false)
+          setSuccesPosition(false);
         }}
       >
         <PositionDetails />
       </Popup>
       <Popup
         isOpen={YourPosOpen}
-        title={'Your Position'}
+        title={"Your Position"}
         handleClose={() => {
-          setYourPosition(false)
+          setYourPosition(false);
         }}
       >
-        <YourPosition handleClosepositionPopup={handleClosepositionPopup} />
+        <YourPosition
+          handleClosepositionPopup={handleClosepositionPopup}
+          position={curPosition}
+        />
       </Popup>
       <Popup
         isOpen={EditPosOpen}
-        title={'Edit Position'}
+        title={"Edit Position"}
         handleClose={() => {
-          setEditPosition(false)
+          setEditPosition(false);
         }}
       >
         <EditPosition
           handleClose={() => {
-            setEditPosition(false)
+            setEditPosition(false);
           }}
+          position={curPosition}
         />
       </Popup>
       <Popup
         isOpen={ClosePos}
-        title={'Close Position'}
+        title={"Close Position"}
         handleClose={() => {
-          setClosePosition(false)
+          setClosePosition(false);
         }}
       >
         <ClosePosition
           handleClose={() => {
-            setClosePosition(false)
+            setClosePosition(false);
           }}
+          position={curPosition}
         />
       </Popup>
     </div>
-  )
-}
+  );
+};
 
-export default Earn
+export default Earn;

@@ -1,15 +1,15 @@
-.container{
-   .seprator{
+.container {
+  .seprator {
     background: rgba(255, 255, 255, 0.2);
     height: 1px;
     width: 100%;
     margin: 20px 0;
-   }
+  }
 
-   .headingRow{
+  .headingRow {
     font-weight: 500 !important;
-   }
-   .rowContent{
+  }
+  .rowContent {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -17,32 +17,31 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 29px;
+  }
 
-   }
-
-   .smallText{
-      font-weight: 400;
+  .smallText {
+    font-weight: 400;
     font-size: 12px;
     line-height: 18px;
     text-align: right;
-    color: #8D97A0;
-   }
+    color: #8d97a0;
+  }
 
-   .text1{
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 26px;
-      text-align: right;
-      color: #FFFFFF;
-   }
+  .text1 {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 26px;
+    text-align: right;
+    color: #ffffff;
+  }
 }
 
 .button {
-    background: linear-gradient(42.73deg, #017d91 -79.94%, #05ac5c 159.12%);
-    border-radius: 14px;
-    color: white;
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 14px;
-    font-weight: 500;
-  }
+  background: linear-gradient(42.73deg, #017d91 -79.94%, #05ac5c 159.12%);
+  border-radius: 14px;
+  color: white;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
+}

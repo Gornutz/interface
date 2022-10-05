@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
 export const useComponentVisible = (initialIsVisible: boolean) => {
-  const [isComponentVisible, setIsComponentVisible] = useState(
-    initialIsVisible
-  );
+  const [isComponentVisible, setIsComponentVisible] =
+    useState(initialIsVisible);
   const ref = useRef(null);
 
   const handleHideDropdown = (event: KeyboardEvent) => {
@@ -13,7 +12,7 @@ export const useComponentVisible = (initialIsVisible: boolean) => {
     }
   };
 
-  const handleClickOutside = event => {
+  const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setIsComponentVisible(false);
     }
@@ -29,4 +28,4 @@ export const useComponentVisible = (initialIsVisible: boolean) => {
   });
 
   return { ref, isComponentVisible, setIsComponentVisible };
-}
+};

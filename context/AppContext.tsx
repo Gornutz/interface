@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useContext } from 'react';
+import React, { useState, ReactNode, useContext } from "react";
 
 interface AppContextInterface {
   user: any;
@@ -18,7 +18,9 @@ type MyAppContextProps = {
   children: NonNullable<ReactNode>;
 };
 
-export const AppContextProvider: React.FC<MyAppContextProps> = ({ children }) => {
+export const AppContextProvider: React.FC<MyAppContextProps> = ({
+  children,
+}) => {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 

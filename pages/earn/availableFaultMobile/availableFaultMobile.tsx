@@ -1,15 +1,14 @@
-import Image from 'next/image'
-import CustomButton from '../../../components/UI/customButton/customButton'
-import styles from './availableFaultMobile.module.scss'
+import Image from "next/image";
+import CustomButton from "../../../components/UI/customButton/customButton";
+import styles from "./availableFaultMobile.module.scss";
 
 const AvailableFaultMobile = ({
   strategiesTable,
   onBtnNewClick,
 }: {
-  strategiesTable: any,
-  onBtnNewClick: (value:string) => void,
+  strategiesTable: any;
+  onBtnNewClick: (value: string) => void;
 }) => {
-
   const handleSuccessPosition = () => {
     onBtnNewClick?.("new-position");
   };
@@ -23,7 +22,12 @@ const AvailableFaultMobile = ({
           <div className={`mt-3 ${styles.mainContainer}`} key={index}>
             <div className={`flex justify-between ${styles.container}`}>
               <div className="flex items-center">
-                <Image src="/icons/pic1.svg" width={40} height={40} alt="icon" />
+                <Image
+                  src="/icons/pic1.svg"
+                  width={40}
+                  height={40}
+                  alt="icon"
+                />
                 <span>{row.name}</span>
               </div>
               <div>
@@ -46,13 +50,15 @@ const AvailableFaultMobile = ({
               <span className={styles.containerSubTitle}>{row.Stablecoin}</span>
             </div>
             <div className={`flex justify-between ${styles.container} `}>
-              <span className={styles.containerTitle}>Token Collateral Yield (1x-1.5x)</span>
+              <span className={styles.containerTitle}>
+                Token Collateral Yield (1x-1.5x)
+              </span>
               <span className={styles.containerSubTitle}>{row.Token}</span>
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
-export default AvailableFaultMobile
+  );
+};
+export default AvailableFaultMobile;

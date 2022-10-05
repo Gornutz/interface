@@ -1,24 +1,28 @@
 interface DepositModalProps {
   tokenName: string,
-  handleButtonClick: (value:string) => void,
+  handleButtonClick: (value: string) => void,
 }
 
 import Button from "../../../components/UI/Button/Button";
 import Style from "./depositModal.module.scss";
 import { useState } from "react";
 import CustomButton from "../../../components/UI/customButton/customButton";
-const DepositModal = ({ tokenName, handleButtonClick }: DepositModalProps) => {
-  // const [type, setValue]=useState(0)
-  // const handleType = () => {
-  //     setValue('success')
-  // }
-  const [collateral, setCollateral] = useState('ICHI');
-  const handleCollateralChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCollateral((event.target as HTMLInputElement).value);
-  };
 
-  const handleSuccessPosition = () => {
-    handleButtonClick?.("success-position");
+import { depositToken } from '../../../contracts/helper';
+
+const DepositModal = ({ tokenName, handleButtonClick }: DepositModalProps) => {
+  const [amount, setAmount] = useState('0');
+  const [isLoading, setLoading] = useState(false);
+
+  const handleSuccessPosition = async () => {
+    try {
+      setLoading(true)
+      await depositToken(7, parseInt(amount), 3)
+      handleButtonClick?.("success-position");
+      setLoading(false)
+    } catch (error) {
+      setLoading(false)
+    }
   };
 
   return (
@@ -26,7 +30,7 @@ const DepositModal = ({ tokenName, handleButtonClick }: DepositModalProps) => {
       <div className={`mt-5 ${Style.chooseContainer}`}>
         <div className={Style["chooseContainer-content"]}>
           <label>Input Amount</label>
-          <input type="text" disabled={collateral == "ICHI" ? false : true} className={collateral == "ICHI" ? "" : Style.inputDisabled} />
+          <input type="text" onChange={(e) => setAmount(e.target.value)} />
           <span className={Style.tokenLabel}>{tokenName}</span>
         </div>
 
@@ -49,6 +53,7 @@ const DepositModal = ({ tokenName, handleButtonClick }: DepositModalProps) => {
         title={"Deposit"}
         buttonStyle={`mt-4 ${Style.button}`}
         handleButtonClick={handleSuccessPosition}
+        isLoading={isLoading}
       />
     </div>
   );

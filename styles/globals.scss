@@ -55,7 +55,7 @@ a {
   background: linear-gradient(118.56deg, #0f2337 0%, #003d4a 100%);
 }
 .bg-main-light {
-  background-color: #F4F0E6;
+  background-color: #f4f0e6;
 }
 
 .net-pay-box {
@@ -94,7 +94,7 @@ header {
   line-height: 24px;
 }
 
-.side-bottom>div {
+.side-bottom > div {
   flex: 50%;
 
   /* or - flex: 0 50% - or - flex-basis: 50% - */
@@ -104,7 +104,6 @@ header {
   @include devices(tablet) {
     flex: 100% !important;
   }
-
 
   /*demo*/
   text-align: center;
@@ -118,7 +117,11 @@ header {
 }
 
 .green-btn {
-  background: linear-gradient(42.73deg, #017d91 -79.94%, #05ac5c 159.12%) !important;
+  background: linear-gradient(
+    42.73deg,
+    #017d91 -79.94%,
+    #05ac5c 159.12%
+  ) !important;
   border-radius: 14px !important;
 }
 
@@ -151,7 +154,6 @@ Circle styles
 .circle-wrap .circle .mask {
   clip: rect(0px, 150px, 150px, 75px);
 }
-
 
 .mask .fill {
   clip: rect(0px, 75px, 150px, 0px);

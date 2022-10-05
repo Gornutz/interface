@@ -1,13 +1,13 @@
-import Image from 'next/image'
-import CustomButton from '../../../components/UI/customButton/customButton'
-import styles from './mobileTableLend.module.scss'
+import Image from "next/image";
+import CustomButton from "../../../components/UI/customButton/customButton";
+import styles from "./mobileTableLend.module.scss";
 
 const MobileTableLend = ({
   tableData,
   onBtnNewClick,
 }: {
-  tableData: any,
-  onBtnNewClick: (value:string) => void,
+  tableData: any;
+  onBtnNewClick: (value: string) => void;
 }) => {
   const handleSuccessPosition = () => {
     onBtnNewClick?.("new-position");
@@ -62,13 +62,15 @@ const MobileTableLend = ({
             <div className={`flex justify-between ${styles.container} `}>
               <span className={styles.containerTitle}>Utilization</span>
               <div>
-                <span className={styles.containerSubTitle}>{row.utilization}</span>
+                <span className={styles.containerSubTitle}>
+                  {row.utilization}
+                </span>
               </div>
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
-export default MobileTableLend
+  );
+};
+export default MobileTableLend;

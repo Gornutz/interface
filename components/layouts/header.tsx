@@ -1,73 +1,72 @@
-import { StayPrimaryLandscapeSharp } from '@mui/icons-material'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { useEffect, useState, useContext } from 'react'
-import { useWidth } from '../../hooks/useWidth'
-import Button from '../UI/Button/Button'
-import Dropdown from '../UI/Dropdown/Dropdown'
-import Text from '../UI/Text/Text'
-import styles from './header.module.scss'
-import Sidebar from './sidebar'
-import { Web3Button } from '../web3/Web3Button'
-import IconButton from '@mui/material/IconButton'
-import ColorModeContext from '../../context/ColorModeContext'
-import { useTheme } from '@mui/material/styles'
-import NotificationsIcon from '@mui/icons-material/Notifications'
+import { StayPrimaryLandscapeSharp } from "@mui/icons-material";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState, useContext } from "react";
+import { useWidth } from "../../hooks/useWidth";
+import Button from "../UI/Button/Button";
+import Dropdown from "../UI/Dropdown/Dropdown";
+import Text from "../UI/Text/Text";
+import styles from "./header.module.scss";
+import Sidebar from "./sidebar";
+import { Web3Button } from "../web3/Web3Button";
+import IconButton from "@mui/material/IconButton";
+import ColorModeContext from "../../context/ColorModeContext";
+import { useTheme } from "@mui/material/styles";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const Header = () => {
+  const [title, setTitle] = useState("Overview");
+  const [isEarn, setIsEarn] = useState(false);
+  const [isLend, setIsLend] = useState(false);
+  const [isOverview, setIsOverview] = useState(false);
+  const [open, setOpen] = useState(false);
+  const colorMode = useContext(ColorModeContext);
+  const theme = useTheme();
 
-  const [title, setTitle] = useState('Overview')
-  const [isEarn, setIsEarn] = useState(false)
-  const [isLend, setIsLend] = useState(false)
-  const [isOverview, setIsOverview] = useState(false)
-  const [open, setOpen] = useState(false)
-  const colorMode = useContext(ColorModeContext)
-  const theme = useTheme()
-
-  const router = useRouter()
-  const pathName = router.pathname
-  const width = useWidth()
+  const router = useRouter();
+  const pathName = router.pathname;
+  const width = useWidth();
   useEffect(() => {
     switch (pathName) {
-      case '/earn':
-        setTitle('Earn')
-        setIsEarn(true)
-        setIsLend(false)
-        setIsOverview(false)
-        break
+      case "/earn":
+        setTitle("Earn");
+        setIsEarn(true);
+        setIsLend(false);
+        setIsOverview(false);
+        break;
 
-      case '/lend':
-        setTitle('Lend')
-        setIsEarn(false)
-        setIsLend(true)
-        setIsOverview(false)
-        break
+      case "/lend":
+        setTitle("Lend");
+        setIsEarn(false);
+        setIsLend(true);
+        setIsOverview(false);
+        break;
       default:
-        setTitle('Overview')
-        setIsLend(false)
-        setIsEarn(false)
-        setIsOverview(true)
-        break
+        setTitle("Overview");
+        setIsLend(false);
+        setIsEarn(false);
+        setIsOverview(true);
+        break;
     }
-  }, [pathName])
+  }, [pathName]);
 
   const handleSidebarClick = (value: string) => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <>
       {width > 680 && (
         <header className="md:h-[90px] md:flex items-center md:px-16 sm:px-1 2sm:px0 sm:h-[150px] sm:block">
-          <Text >
-            {' '}
+          <Text>
+            {" "}
             <h3>{title}</h3>
           </Text>
 
           <div className="flex my-grid items-center">
             {isOverview && (
               <Text className="mr-4">
-                {' '}
+                {" "}
                 <h4>LTV $000,000.00</h4>
               </Text>
             )}
@@ -87,11 +86,21 @@ const Header = () => {
                 height={34}
               />
             </IconButton> */}
-            
-            <div className={`rounded-[12px] p-[7px] ${theme.palette.mode === 'light' ? 'bg-[#e2e8f0]' : 'bg-[#214554]'}`}>
-              <NotificationsIcon sx={{cursor: 'pointer', fontSize: '1.6rem', color: theme.palette.mode === 'light' ? '#0B2845' : '#fff'}}/>
+
+            <div
+              className={`rounded-[12px] p-[7px] ${
+                theme.palette.mode === "light" ? "bg-[#e2e8f0]" : "bg-[#214554]"
+              }`}
+            >
+              <NotificationsIcon
+                sx={{
+                  cursor: "pointer",
+                  fontSize: "1.6rem",
+                  color: theme.palette.mode === "light" ? "#0B2845" : "#fff",
+                }}
+              />
             </div>
-            
+
             {/* <Image
               src="/icons/notification.svg"
               alt="Blueberry Web"
@@ -99,7 +108,7 @@ const Header = () => {
               height={40}
             /> */}
 
-            <Dropdown className={'flex-1'}></Dropdown>
+            <Dropdown className={"flex-1"}></Dropdown>
 
             <Web3Button />
           </div>
@@ -128,7 +137,7 @@ const Header = () => {
               />
             )}
 
-            <div className={styles['m-auto']}>
+            <div className={styles["m-auto"]}>
               <Image
                 src="/icons/home.svg"
                 alt="Blueberry Web"
@@ -158,19 +167,19 @@ const Header = () => {
             className={`absolute top-20 left-0 h-screen w-screen  transform ${
               styles.mobileNavbarBg
             } ${
-              open ? '-translate-x-0' : '-translate-x-full'
+              open ? "-translate-x-0" : "-translate-x-full"
             } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
           >
             <div className={`${styles.mobileNavbarContainer} h-[90px]`}>
               <div className="flex flex-col h-full">
-                <Sidebar handleSidebarClick={handleSidebarClick}/>
+                <Sidebar handleSidebarClick={handleSidebarClick} />
               </div>
             </div>
           </div>
         </>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

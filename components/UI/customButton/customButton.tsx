@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import Style from "./customButton.module.scss";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const CustomButton = ({
   title,
@@ -10,16 +11,29 @@ const CustomButton = ({
   children = <></>,
 }: ButtonProps) => {
   const handleClick = () => {
+    if (isLoading) {
+      return;
+    }
     handleButtonClick?.();
   };
 
   return (
     <Button
       onClick={handleClick}
-      className={`${Style.container} ${
-        isDisabled ? Style.disabled : ""
-      }  ${Style.button} ${buttonStyle}`}
+      className={`${Style.container} ${isDisabled ? Style.disabled : ""}  ${
+        Style.button
+      } ${buttonStyle}`}
     >
+      {isLoading && (
+        <CircularProgress
+          color="inherit"
+          sx={{
+            width: "25px !important",
+            height: "25px !important",
+            mr: "10px",
+          }}
+        />
+      )}
       {title}
     </Button>
   );

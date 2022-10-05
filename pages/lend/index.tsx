@@ -1,78 +1,82 @@
-import { Tabs, Tab } from '@mui/material'
-import type { NextPage } from 'next'
-import Image from 'next/image'
-import { useState } from 'react'
-import CustomButton from '../../components/UI/customButton/customButton'
-import { useWidth } from '../../hooks/useWidth'
-import styles from './lend.module.scss'
-import MobileTableLend from './mobileTableLend/mobileTableLend'
-import DepositModal from './depositModal/depositModal'
-import Popup from '../../components/UI/Popup/popup'
-import { Web3Button } from '../../components/web3/Web3Button'
-import Text from '../../components/UI/Text/Text'
-import Dropdown from '../../components/UI/Dropdown/Dropdown'
-import { useTheme } from '@mui/material/styles'
-import TableGrid from './TableGrid/TableGrid'
+import { Tabs, Tab } from "@mui/material";
+import type { NextPage } from "next";
+import Image from "next/image";
+import { useState } from "react";
+import CustomButton from "../../components/UI/customButton/customButton";
+import { useWidth } from "../../hooks/useWidth";
+import styles from "./lend.module.scss";
+import MobileTableLend from "./mobileTableLend/mobileTableLend";
+import DepositModal from "./depositModal/depositModal";
+import Popup from "../../components/UI/Popup/popup";
+import { Web3Button } from "../../components/web3/Web3Button";
+import Text from "../../components/UI/Text/Text";
+import Dropdown from "../../components/UI/Dropdown/Dropdown";
+import { useTheme } from "@mui/material/styles";
+import TableGrid from "./TableGrid/TableGrid";
 
 const tableData = [
   {
-    name: 'ICHI',
-    image: '/icons/pic.svg',
-    apy: '12%',
-    totalSupplyIchi: '5,000,000 ICHI',
-    totalSupplyusd: '5,000,000 USD',
-    totalBorrowedIchi: '4,000,000 ICHI',
-    totalBorrowedUsd: '4,000,000 USD',
-    utilization: '80%',
+    name: "ICHI",
+    image: "/icons/pic.svg",
+    apy: "12%",
+    totalSupplyIchi: "5,000,000 ICHI",
+    totalSupplyusd: "5,000,000 USD",
+    totalBorrowedIchi: "4,000,000 ICHI",
+    totalBorrowedUsd: "4,000,000 USD",
+    utilization: "80%",
   },
   {
-    name: 'oneICHI',
-    image: '/icons/pic1.svg',
-    apy: '12%',
-    totalSupplyIchi: '5,000,000 ICHI',
-    totalSupplyusd: '5,000,000 USD',
-    totalBorrowedIchi: '4,000,000 ICHI',
-    totalBorrowedUsd: '4,000,000 USD',
-    utilization: '80%',
+    name: "oneICHI",
+    image: "/icons/pic1.svg",
+    apy: "12%",
+    totalSupplyIchi: "5,000,000 ICHI",
+    totalSupplyusd: "5,000,000 USD",
+    totalBorrowedIchi: "4,000,000 ICHI",
+    totalBorrowedUsd: "4,000,000 USD",
+    utilization: "80%",
   },
   {
-    name: 'ICHI',
-    image: '/icons/pic.svg',
-    apy: '12%',
-    totalSupplyIchi: '5,000,000 ICHI',
-    totalSupplyusd: '5,000,000 USD',
-    totalBorrowedIchi: '4,000,000 ICHI',
-    totalBorrowedUsd: '4,000,000 USD',
-    utilization: '80%',
+    name: "ICHI",
+    image: "/icons/pic.svg",
+    apy: "12%",
+    totalSupplyIchi: "5,000,000 ICHI",
+    totalSupplyusd: "5,000,000 USD",
+    totalBorrowedIchi: "4,000,000 ICHI",
+    totalBorrowedUsd: "4,000,000 USD",
+    utilization: "80%",
   },
-]
+];
 
 const Earn: NextPage = () => {
-  const [depositDlgOpen, setDepositDlgOpen] = useState(false)
-  const [tokenName, setTokenName] = useState("ICHI")
-  const [value, setValue] = useState(0)
-  const width = useWidth()
-  const theme = useTheme()
+  const [depositDlgOpen, setDepositDlgOpen] = useState(false);
+  const [tokenName, setTokenName] = useState("ICHI");
+  const [value, setValue] = useState(0);
+  const width = useWidth();
+  const theme = useTheme();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
+    setValue(newValue);
+  };
 
   const closeDepositModal = () => {
-    setDepositDlgOpen(false)
-  }
+    setDepositDlgOpen(false);
+  };
   const handleSuccessPosition = (value: string) => {
-    closeDepositModal()
-  }
+    closeDepositModal();
+  };
   const handleMobileDeposit = (value: string) => {
-    setDepositDlgOpen(true)
-  }
+    setDepositDlgOpen(true);
+  };
   return (
-    <div className={`${width <= 680 ? 'h-fit' : 'h-full'} items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block`}>
+    <div
+      className={`${
+        width <= 680 ? "h-fit" : "h-full"
+      } items-center my-4 md:px-16 sm:px-1 2sm:px0 sm:block`}
+    >
       {width <= 680 && (
         <header className="md:h-[90px] pb-4 md:flex items-center md:px-16 sm:px-1 2sm:px0 sm:h-[150px] sm:block">
           <Text>
-            {' '}
+            {" "}
             <h3>Lend</h3>
           </Text>
 
@@ -85,7 +89,7 @@ const Earn: NextPage = () => {
               className={styles.menuIcon}
             />
 
-            <Dropdown className={'flex-1'} />
+            <Dropdown className={"flex-1"} />
             <Web3Button />
           </div>
         </header>
@@ -94,11 +98,19 @@ const Earn: NextPage = () => {
         <div>
           <h4 className={styles.heading}>Lending</h4>
           <p className={styles.text}>
-            Earn competitive interest on single sided deposits with Blueberry Lend
+            Earn competitive interest on single sided deposits with Blueberry
+            Lend
           </p>
         </div>
         <div className={styles.rightContainer}>
-          <input className={`${styles.btnSearch} ${theme.palette.mode === 'light' ? 'bg-black/[0.1]':'bg-white/[0.1]'}`} placeholder={"Search..."}/>
+          <input
+            className={`${styles.btnSearch} ${
+              theme.palette.mode === "light"
+                ? "bg-black/[0.1]"
+                : "bg-white/[0.1]"
+            }`}
+            placeholder={"Search..."}
+          />
         </div>
       </div>
 
@@ -111,7 +123,16 @@ const Earn: NextPage = () => {
       >
         <Tab
           label={
-            <span style={{ color: value === 0 ? '#19857b' : (theme.palette.mode === 'light' ? '#000' : '#fff') }}>
+            <span
+              style={{
+                color:
+                  value === 0
+                    ? "#19857b"
+                    : theme.palette.mode === "light"
+                    ? "#000"
+                    : "#fff",
+              }}
+            >
               My Positions
             </span>
           }
@@ -124,14 +145,21 @@ const Earn: NextPage = () => {
           }
         /> */}
       </Tabs>
-      <div className={`${theme.palette.mode === 'light' ? styles.dividerLight : styles.dividerDark} ${styles.divider}`}></div>
-      {value == 0 && (
-        <TableGrid />
-      )}
+      <div
+        className={`${
+          theme.palette.mode === "light"
+            ? styles.dividerLight
+            : styles.dividerDark
+        } ${styles.divider}`}
+      ></div>
+      {value == 0 && <TableGrid />}
       {value == 1 && <div></div>}
 
       {width <= 680 ? (
-        <MobileTableLend tableData={tableData || []} onBtnNewClick={handleMobileDeposit} />
+        <MobileTableLend
+          tableData={tableData || []}
+          onBtnNewClick={handleMobileDeposit}
+        />
       ) : (
         <div className="mt-10 pb-40">
           <table className={styles.table_bottom}>
@@ -148,11 +176,22 @@ const Earn: NextPage = () => {
             </thead>
 
             <tbody className={styles.tbody}>
-              <tr className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
+              <tr
+                className={`border-y-[1px] ${
+                  theme.palette.mode === "light"
+                    ? "border-black/[0.2]"
+                    : "border-white/[0.1]"
+                }`}
+              >
                 <td className={styles.columnRoundLeft}>
                   <div className={styles.tableCol}>
-                    <Image src="/icons/pic.svg" width={30} height={30} alt={"ICHI"}/>
-                    <span style={{ paddingLeft: '0.7rem' }}>ICHI</span>
+                    <Image
+                      src="/icons/pic.svg"
+                      width={30}
+                      height={30}
+                      alt={"ICHI"}
+                    />
+                    <span style={{ paddingLeft: "0.7rem" }}>ICHI</span>
                   </div>
                 </td>
                 <td>12%</td>
@@ -167,22 +206,36 @@ const Earn: NextPage = () => {
                 <td>80%</td>
                 <td></td>
                 <td>
-                  {' '}
+                  {" "}
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {setDepositDlgOpen(true); setTokenName("ICHI");}}
+                      handleButtonClick={() => {
+                        setDepositDlgOpen(true);
+                        setTokenName("ICHI");
+                      }}
                       buttonStyle={styles.depositButton}
                     />
                     {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
                   </div>
                 </td>
               </tr>
-              <tr className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
+              <tr
+                className={`border-y-[1px] ${
+                  theme.palette.mode === "light"
+                    ? "border-black/[0.2]"
+                    : "border-white/[0.1]"
+                }`}
+              >
                 <td className={styles.columnRoundLeft}>
                   <div className={styles.tableCol}>
-                    <Image src="/icons/pic1.svg" width={30} height={30} alt={"oneICHI"}/>
-                    <span style={{ paddingLeft: '0.7rem' }}>oneICHI</span>
+                    <Image
+                      src="/icons/pic1.svg"
+                      width={30}
+                      height={30}
+                      alt={"oneICHI"}
+                    />
+                    <span style={{ paddingLeft: "0.7rem" }}>oneICHI</span>
                   </div>
                 </td>
                 <td>12%</td>
@@ -197,22 +250,36 @@ const Earn: NextPage = () => {
                 <td>80%</td>
                 <td></td>
                 <td>
-                  {' '}
+                  {" "}
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {setDepositDlgOpen(true); setTokenName("oneICHI");}}
+                      handleButtonClick={() => {
+                        setDepositDlgOpen(true);
+                        setTokenName("oneICHI");
+                      }}
                       buttonStyle={styles.depositButton}
                     />
                     {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
                   </div>
                 </td>
               </tr>
-              <tr className={`border-y-[1px] ${theme.palette.mode === 'light' ? 'border-black/[0.2]':'border-white/[0.1]'}`}>
+              <tr
+                className={`border-y-[1px] ${
+                  theme.palette.mode === "light"
+                    ? "border-black/[0.2]"
+                    : "border-white/[0.1]"
+                }`}
+              >
                 <td className={styles.columnRoundLeft}>
                   <div className={styles.tableCol}>
-                    <Image src="/icons/pic.svg" width={30} height={30} alt={"USDC"}/>
-                    <span style={{ paddingLeft: '0.7rem' }}>USDC</span>
+                    <Image
+                      src="/icons/pic.svg"
+                      width={30}
+                      height={30}
+                      alt={"USDC"}
+                    />
+                    <span style={{ paddingLeft: "0.7rem" }}>USDC</span>
                   </div>
                 </td>
                 <td>12%</td>
@@ -227,11 +294,14 @@ const Earn: NextPage = () => {
                 <td>80%</td>
                 <td></td>
                 <td>
-                  {' '}
+                  {" "}
                   <div className={styles.tableCol}>
                     <CustomButton
                       title="Deposit"
-                      handleButtonClick={() => {setDepositDlgOpen(true); setTokenName("USDC");}}
+                      handleButtonClick={() => {
+                        setDepositDlgOpen(true);
+                        setTokenName("USDC");
+                      }}
                       buttonStyle={styles.depositButton}
                     />
                     {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
@@ -247,12 +317,15 @@ const Earn: NextPage = () => {
         // onClick={(e) => newPositionOpenHandler('success-position')}
         isOpen={depositDlgOpen}
         handleClose={closeDepositModal}
-        title={'Deposit'}
+        title={"Deposit"}
       >
-        <DepositModal tokenName={tokenName} handleButtonClick={handleSuccessPosition} />
+        <DepositModal
+          tokenName={tokenName}
+          handleButtonClick={handleSuccessPosition}
+        />
       </Popup>
     </div>
-  )
-}
+  );
+};
 
-export default Earn
+export default Earn;
