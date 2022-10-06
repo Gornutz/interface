@@ -24,7 +24,7 @@ const YourPosition = ({
   };
   console.log("curPos?", position);
 
-  let borrowingAmount = Number(position.collateralSize) - Number(position.underlyingAmount);
+  let borrowingAmount = Number(position.collateralSize);
   let borrowingRate = Number((borrowingAmount / Number(position.collateralSize)) * 100).toFixed(2);
   let leverageFactor = Number(position.collateralSize) / Number(position.underlyingAmount);
 
