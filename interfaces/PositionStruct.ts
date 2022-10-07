@@ -1,12 +1,15 @@
-export default interface IPositionStruct {
+import { BigNumber } from "ethers";
+
+export interface IPosition {
     owner: string,
+    positionId: number,
     collToken: string,
     underlyingToken: string,
-    underlyingAmount: string,
-    underlyingcTokenAmount: string,
+    underlyingAmount: BigNumber,
+    underlyingcTokenAmount: BigNumber,
     collId: string,
-    collateralSize: string,
+    collateralSize: BigNumber,
     debtMap: string,
-    positionId: number,
-    debtValue: number,
+    debtValue: BigNumber,
+    risk: number,
 }

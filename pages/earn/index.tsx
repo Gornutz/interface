@@ -11,8 +11,8 @@ import YourPosition from "./yourPosition/yourPosition";
 import EditPosition from "./editPosition/editPosition";
 import ClosePosition from "./closePosition/closePosition";
 import CustomButton from "../../components/UI/customButton/customButton";
-import StrategiesTable from "../../interfaces/strategiesTable";
-import TableGrid from "../../components/UI/TableGrid/TableGrid";
+import { IPosition, StrategiesTable } from "../../interfaces";
+import LeveragePositionTable from "../../components/UI/LeveragePositionTable/LeveragePositionTable";
 import Button from "../../components/UI/Button/Button";
 import Dropdown from "../../components/UI/Dropdown/Dropdown";
 import Text from "../../components/UI/Text/Text";
@@ -59,18 +59,7 @@ const Earn: NextPage = () => {
   const [YourPosOpen, setYourPosition] = useState(false)
   const [EditPosOpen, setEditPosition] = useState(false)
   const [ClosePos, setClosePosition] = useState(false)
-  const [curPosition, setCurPosition] = useState({
-    owner: '',
-    collToken: '',
-    underlyingToken: '',
-    underlyingAmount: '',
-    underlyingcTokenAmount: '',
-    collId: '',
-    collateralSize: '',
-    debtMap: '',
-    positionId: 0,
-    debtValue: 0
-  })
+  const [curPosition, setCurPosition] = useState<IPosition>();
 
   const width = useWidth();
   const theme = useTheme();
@@ -80,7 +69,7 @@ const Earn: NextPage = () => {
   };
 
   //
-  const yourPositionOpenHandler = (item) => {
+  const openPositionModal = (item) => {
     setCurPosition(item);
     newPositionOpenHandler("your-position");
   };
@@ -209,9 +198,9 @@ const Earn: NextPage = () => {
           } ${styles.divider}`}
       ></div>
       {value == 0 && (
-        <TableGrid
-          yourPositionOpenHandler={yourPositionOpenHandler}
-        ></TableGrid>
+        <LeveragePositionTable
+          openPosition={openPositionModal}
+        ></LeveragePositionTable>
       )}
       {value == 1 && <div></div>}
 

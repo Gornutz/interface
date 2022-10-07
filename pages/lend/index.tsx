@@ -13,6 +13,7 @@ import Text from "../../components/UI/Text/Text";
 import Dropdown from "../../components/UI/Dropdown/Dropdown";
 import { useTheme } from "@mui/material/styles";
 import TableGrid from "./TableGrid/TableGrid";
+import { lendClose } from "../../contracts/helper";
 
 const tableData = [
   {
@@ -67,6 +68,7 @@ const Earn: NextPage = () => {
   const handleMobileDeposit = (value: string) => {
     setDepositDlgOpen(true);
   };
+
   return (
     <div
       className={`${
@@ -305,6 +307,13 @@ const Earn: NextPage = () => {
                       buttonStyle={styles.depositButton}
                     />
                     {/* <Image src="/icons/union.svg" width={20} height={20} /> */}
+                    <CustomButton
+                      title="Close"
+                      handleButtonClick={async () => {
+                        await lendClose();
+                      }}
+                      buttonStyle={styles.depositButton}
+                    />
                   </div>
                 </td>
               </tr>

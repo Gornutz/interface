@@ -9,6 +9,10 @@ import LeverageSlider from "./LeverageSlider";
 import { useState } from "react";
 import CustomButton from "../../../components/UI/customButton/customButton";
 
+import { useWeb3React } from "@web3-react/core";
+import { Web3Provider } from "@ethersproject/providers";
+import { toast } from "react-toastify";
+
 import { openPosition } from "../../../contracts/helper";
 
 const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
@@ -18,6 +22,7 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
   const [ichiAmount, setICHIAmount] = useState(0);
   const [usdcLeverage, setUSDCLeverage] = useState(1.2);
   const [ichiLeverage, setICHILeverage] = useState(1.4);
+  const { active } = useWeb3React<Web3Provider>();
 
   const handleCollateralChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -26,6 +31,10 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
   };
 
   const handleSuccessPosition = async () => {
+    if (!active) {
+      toast.error("Please connect wallet first!");
+      return;
+    }
     if (typeof window.ethereum !== undefined && window.ethereum) {
       var amount = collateral == "ICHI" ? ichiAmount : usdcAmount;
       var amount1 =
@@ -33,12 +42,14 @@ const NewPosition = ({ handleButtonClick }: NewPositionProps) => {
 
       try {
         setLoading(true);
-        await openPosition(collateral, amount, amount1);
+        const res = await openPosition(collateral, amount, amount1);
         setLoading(false);
-        handleButtonClick?.("");
+        if (res) {
+          handleButtonClick?.("success-position");
+        }
       } catch (error) {
         setLoading(false);
-        handleButtonClick?.("success-position");
+        handleButtonClick?.("");
       }
     }
   };

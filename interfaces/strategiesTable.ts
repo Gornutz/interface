@@ -1,4 +1,4 @@
-export default interface StrategiesTable {
+export interface StrategiesTable {
   id: number;
   name: string;
   tvl?: string;

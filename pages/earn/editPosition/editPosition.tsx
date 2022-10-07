@@ -9,22 +9,18 @@ import {
 
 import CustomButton from "../../../components/UI/customButton/customButton";
 import { addCollateral, removeCollateral } from "../../../contracts/helper";
+import { IPosition } from "../../../interfaces";
+import { BigNumber, utils } from "ethers";
+
+interface Props {
+  handleClose: () => void;
+  position: IPosition
+}
 
 const EditPosition = ({
   handleClose,
-  position = {
-    owner: '',
-    collToken: '',
-    underlyingToken: '',
-    underlyingAmount: '0',
-    underlyingcTokenAmount: '0',
-    collId: '',
-    collateralSize: '0',
-    debtMap: '',
-    positionId: 0,
-    debtValue: 0
-  }
-}) => {
+  position
+}: Props) => {
   const [collateral, setCollateral] = useState('Add');
   const [newAmount, setNewAmount] = useState("0");
   const [isLoading, setLoading] = useState(false);
@@ -35,9 +31,8 @@ const EditPosition = ({
     setCollateral((event.target as HTMLInputElement).value);
   };
 
-  console.log("curPos?", position);
-
-  let leverageFactor = Number(position.collateralSize) / Number(position.underlyingAmount);
+  let leverageFactor = BigNumber.from(position.collateralSize)
+    .mul(100).div(position.underlyingAmount).toNumber()/100;
 
   const handleConfirm = async () => {
     try {
@@ -162,7 +157,7 @@ const EditPosition = ({
         <div>
           <div className={Style.rowContent}>
             <span>Total Position Value</span>
-            <span className="text-right">${position.collateralSize}</span>
+            <span className="text-right">${utils.formatEther(position.collateralSize)}</span>
           </div>
           <div className={Style.rowContent}>
             <span>New Collateral Value</span>

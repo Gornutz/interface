@@ -1,16 +1,14 @@
 import { ethers } from "ethers";
+import { toast } from "react-toastify";
 
-import spell_abi from "./abi/IchiSpellVault_abi.json";
-import bank_abi from "./abi/BlueBerryBank_abi.json";
-import sToken_abi from "./abi/SupplyToken_abi.json";
-import bToken_abi from "./abi/BaseToken_abi.json";
-// import erc20_abi from './abi/ERC20.json';
+import { ABIS } from "./abi";
 
 import {
   ICHI_VAULT_SPELL_ADDR,
   USDC_ADDR,
   ICHI_ADDR,
   BANK_ADDR,
+  SAFEBOX_ADDR,
 } from "./constants";
 
 declare global {
@@ -26,70 +24,50 @@ export const openPosition = async (
 ) => {
   let { ethereum } = window;
   if (typeof window.ethereum !== undefined && window.ethereum) {
-    let provider = new ethers.providers.Web3Provider(ethereum);
-    let signer = provider.getSigner();
+    try {
+      let provider = new ethers.providers.Web3Provider(ethereum);
+      let signer = provider.getSigner();
+      let signer_address = await signer.getAddress();
 
-    let bank_contract = new ethers.Contract(BANK_ADDR, bank_abi, signer);
+      let bank_contract = new ethers.Contract(BANK_ADDR, ABIS.Bank, signer);
 
-    let spell_iface = new ethers.utils.Interface(spell_abi);
+      let spell_iface = new ethers.utils.Interface(ABIS.IchiSpell);
 
-    let token_contract =
-      collateral == "ICHI"
-        ? new ethers.Contract(ICHI_ADDR, bToken_abi, signer)
-        : new ethers.Contract(USDC_ADDR, sToken_abi, signer);
-    const tx = await token_contract.approve(
-      BANK_ADDR,
-      ethers.utils.parseUnits(amount.toString(), 18)
-    );
-    await tx.wait();
+      let token_contract =
+        collateral == "ICHI"
+          ? new ethers.Contract(ICHI_ADDR, ABIS.ERC20, signer)
+          : new ethers.Contract(USDC_ADDR, ABIS.ERC20, signer);
 
-    let tx1 = await bank_contract.execute(
-      0,
-      ICHI_VAULT_SPELL_ADDR,
-      spell_iface.encodeFunctionData("deposit", [
-        collateral == "ICHI" ? ICHI_ADDR : USDC_ADDR,
-        ethers.utils.parseUnits(amount.toString(), 18),
-        ethers.utils.parseUnits(amount1.toString(), 18),
-      ])
-    );
-    await tx1.wait();
-  }
-};
-
-export const getPositionList = async () => {
-  let { ethereum } = window;
-  var positions = [];
-  if (typeof window.ethereum !== undefined && window.ethereum) {
-    let provider = new ethers.providers.Web3Provider(ethereum);
-    let signer = provider.getSigner();
-    let signer_address = await signer.getAddress();
-
-    let bank_contract = new ethers.Contract(BANK_ADDR, bank_abi, signer);
-    let _nextPositionId = await bank_contract.nextPositionId();
-    let nextPositionId = _nextPositionId.toString();
-
-    for (let i = 0; i < nextPositionId; i++) {
-      var result = await bank_contract.positions(i.toString());
-      var debtValue = await bank_contract.getDebtValue(i.toString());
-
-      if (result[0] === signer_address) {
-        var obj = {
-          owner: result[0], // The owner of this position.
-          collToken: result[1], // The ERC1155 token used as collateral for this position.
-          underlyingToken: result[2],
-          underlyingAmount: ethers.utils.formatEther(result[3]),
-          underlyingcTokenAmount: ethers.utils.formatEther(result[4]),
-          collId: ethers.utils.formatEther(result[5]), // The token id used as collateral.
-          collateralSize: ethers.utils.formatEther(result[6]), // The size of collateral token for this position.
-          debtMap: ethers.utils.formatEther(result[7]), // Bitmap of nonzero debt. i^th bit is set iff debt share of i^th bank is nonzero.
-          positionId: i,
-          debtValue: parseFloat(ethers.utils.formatEther(debtValue)).toFixed(3),
-        };
-        positions.push(obj);
+      const _tokenValue = await token_contract.balanceOf(signer_address);
+      const mytokenValue = ethers.utils.formatEther(_tokenValue);
+      if (Number(mytokenValue) < amount) {
+        toast.error(`Your max amount is ${mytokenValue}`);
+        return false;
       }
+
+      const tx = await token_contract.approve(
+        BANK_ADDR,
+        ethers.utils.parseUnits(amount.toString(), 18)
+      );
+      await tx.wait();
+
+      let tx1 = await bank_contract.execute(
+        0,
+        ICHI_VAULT_SPELL_ADDR,
+        spell_iface.encodeFunctionData("openPosition", [
+          collateral == "ICHI" ? ICHI_ADDR : USDC_ADDR,
+          ethers.utils.parseUnits(amount.toString(), 18),
+          ethers.utils.parseUnits(amount1.toString(), 18),
+        ])
+      );
+      await tx1.wait();
+      return true;
+    } catch (error) {
+      console.log("openPosition", error);
+      return false;
     }
   }
-  return positions;
+  return false;
 };
 
 export const addCollateral = async (
@@ -102,12 +80,12 @@ export const addCollateral = async (
     let provider = new ethers.providers.Web3Provider(ethereum);
     let signer = provider.getSigner();
 
-    let bank_contract = new ethers.Contract(BANK_ADDR, bank_abi, signer);
+    let bank_contract = new ethers.Contract(BANK_ADDR, ABIS.Bank, signer);
 
-    let spell_iface = new ethers.utils.Interface(spell_abi);
+    let spell_iface = new ethers.utils.Interface(ABIS.IchiSpell);
 
     // add collateral
-    let token_contract = new ethers.Contract(USDC_ADDR, sToken_abi, signer);
+    let token_contract = new ethers.Contract(USDC_ADDR, ABIS.ERC20, signer);
     const tx = await token_contract.approve(
       BANK_ADDR,
       ethers.utils.parseUnits(amount.toString(), 18)
@@ -117,10 +95,9 @@ export const addCollateral = async (
     let tx1 = await bank_contract.execute(
       position_id,
       ICHI_VAULT_SPELL_ADDR,
-      spell_iface.encodeFunctionData("deposit", [
+      spell_iface.encodeFunctionData("increasePosition", [
         USDC_ADDR,
         ethers.utils.parseUnits(amount.toString(), 18),
-        ethers.utils.parseUnits((amount * leverage).toString(), 18),
       ])
     );
     await tx1.wait();
@@ -137,11 +114,11 @@ export const removeCollateral = async (
     let provider = new ethers.providers.Web3Provider(ethereum);
     let signer = provider.getSigner();
 
-    let bank_contract = new ethers.Contract(BANK_ADDR, bank_abi, signer);
+    let bank_contract = new ethers.Contract(BANK_ADDR, ABIS.Bank, signer);
 
-    let spell_iface = new ethers.utils.Interface(spell_abi);
+    let spell_iface = new ethers.utils.Interface(ABIS.IchiSpell);
 
-    let token_contract = new ethers.Contract(USDC_ADDR, sToken_abi, signer);
+    let token_contract = new ethers.Contract(USDC_ADDR, ABIS.ERC20, signer);
     const tx = await token_contract.approve(
       BANK_ADDR,
       ethers.utils.parseUnits(amount.toString(), 18)
@@ -151,12 +128,9 @@ export const removeCollateral = async (
     let tx1 = await bank_contract.execute(
       position_id,
       ICHI_VAULT_SPELL_ADDR,
-      spell_iface.encodeFunctionData("withdraw", [
+      spell_iface.encodeFunctionData("reducePosition", [
         USDC_ADDR,
         ethers.utils.parseUnits(amount.toString(), 18),
-        ethers.utils.parseUnits("0", 18),
-        ethers.utils.parseUnits("0", 18),
-        ethers.utils.parseUnits("0", 18),
       ])
     );
 
@@ -174,11 +148,11 @@ export const depositToken = async (
     let provider = new ethers.providers.Web3Provider(ethereum);
     let signer = provider.getSigner();
 
-    let bank_contract = new ethers.Contract(BANK_ADDR, bank_abi, signer);
+    let bank_contract = new ethers.Contract(BANK_ADDR, ABIS.Bank, signer);
 
-    let spell_iface = new ethers.utils.Interface(spell_abi);
+    let spell_iface = new ethers.utils.Interface(ABIS.IchiSpell);
 
-    let token_contract = new ethers.Contract(USDC_ADDR, sToken_abi, signer);
+    let token_contract = new ethers.Contract(USDC_ADDR, ABIS.ERC20, signer);
     const tx = await token_contract.approve(
       BANK_ADDR,
       ethers.utils.parseUnits(amount.toString(), 18)
@@ -196,5 +170,52 @@ export const depositToken = async (
     );
 
     await tx1.wait();
+  }
+};
+
+export const lendDeposit = async (amount: number) => {
+  let { ethereum } = window;
+  if (typeof window.ethereum !== undefined && window.ethereum) {
+    let provider = new ethers.providers.Web3Provider(ethereum);
+    let signer = provider.getSigner();
+
+    let safebox_contract = new ethers.Contract(
+      SAFEBOX_ADDR,
+      ABIS.SafeBox,
+      signer
+    );
+
+    let token_contract = new ethers.Contract(USDC_ADDR, ABIS.ERC20, signer);
+    const tx = await token_contract.approve(
+      SAFEBOX_ADDR,
+      ethers.utils.parseUnits(amount.toString(), 18)
+    );
+    await tx.wait();
+
+    let tx1 = await safebox_contract.deposit(
+      ethers.utils.parseUnits(amount.toString(), 18)
+    );
+
+    await tx1.wait();
+  }
+};
+
+export const lendClose = async () => {
+  let { ethereum } = window;
+  if (typeof window.ethereum !== undefined && window.ethereum) {
+    let provider = new ethers.providers.Web3Provider(ethereum);
+    let signer = provider.getSigner();
+    let signer_address = await signer.getAddress();
+
+    let safebox_contract = new ethers.Contract(
+      SAFEBOX_ADDR,
+      ABIS.SafeBox,
+      signer
+    );
+
+    let amount = await safebox_contract.balanceOf(signer_address);
+    let tx = await safebox_contract.withdraw(amount.toString());
+
+    await tx.wait();
   }
 };

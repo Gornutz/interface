@@ -1,45 +1,56 @@
-import Style from './yourPosition.module.scss'
-import IPositionStruct from '../../../interfaces/PositionStruct'
+import Style from "./yourPosition.module.scss";
+import { IPosition } from "../../../interfaces";
+import { toast } from "react-toastify";
+import { BigNumber, ethers, utils } from "ethers";
+import { useActiveWeb3React } from "../../../hooks";
 
 const YourPosition = ({
   handleClosepositionPopup,
   position = {
-    owner: '',
-    collToken: '',
-    underlyingToken: '',
-    underlyingAmount: '0',
-    underlyingcTokenAmount: '0',
-    collId: '',
-    collateralSize: '0',
-    debtMap: '',
+    owner: "",
+    collToken: "",
+    underlyingToken: "",
+    underlyingAmount: ethers.constants.Zero,
+    underlyingcTokenAmount: ethers.constants.Zero,
+    collId: "",
+    collateralSize: ethers.constants.Zero,
+    debtMap: "",
     positionId: 0,
-    debtValue: 0
-  }
+    debtValue: ethers.constants.Zero,
+    risk: 0
+  },
 }: {
-  handleClosepositionPopup: any,
-  position: IPositionStruct,
+  handleClosepositionPopup: any;
+  position: IPosition;
 }) => {
+  const { active } = useActiveWeb3React();
   const handleClick = (value: string) => {
+    if (!active) {
+      toast.error("Please connect wallet first!");
+      return;
+    }
+
     handleClosepositionPopup(value);
   };
-  console.log("curPos?", position);
 
-  let borrowingAmount = Number(position.collateralSize);
-  let borrowingRate = Number((borrowingAmount / Number(position.collateralSize)) * 100).toFixed(2);
-  let leverageFactor = Number(position.collateralSize) / Number(position.underlyingAmount);
+  let borrowingAmount = utils.formatEther(position.collateralSize);
+  let borrowingRate = BigNumber.from(position.collateralSize).mul(100).div(position.collateralSize).toNumber();
+  let leverageFactor = BigNumber.from(position.collateralSize).mul(100).div(position.underlyingAmount).toNumber()/100;
 
   return (
     <div className={`mt-5 ${Style.container}`}>
       <div className="p-3">
         <div className={`${Style.rowContent} ${Style.headingRow}`}>
           <span>Your Collateral ($ Value)</span>
-          <span className="text-right">${position.underlyingAmount} USDC</span>
+          <span className="text-right">
+            ${utils.formatEther(position.underlyingAmount)} USDC
+          </span>
         </div>
         <div className={Style.seprator}> </div>
         <div>
           <div className={Style.rowContent}>
             <span>Total Position Value</span>
-            <span className="text-right">${position.collateralSize} USDC</span>
+            <span className="text-right">${utils.formatEther(position.collateralSize)} USDC</span>
           </div>
           <div className={Style.rowContent}>
             <span>Borrowing</span>

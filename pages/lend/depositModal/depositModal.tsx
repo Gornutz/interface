@@ -1,6 +1,6 @@
 interface DepositModalProps {
-  tokenName: string,
-  handleButtonClick: (value: string) => void,
+  tokenName: string;
+  handleButtonClick: (value: string) => void;
 }
 
 import Button from "../../../components/UI/Button/Button";
@@ -8,20 +8,28 @@ import Style from "./depositModal.module.scss";
 import { useState } from "react";
 import CustomButton from "../../../components/UI/customButton/customButton";
 
-import { depositToken } from '../../../contracts/helper';
+import { useWeb3React } from "@web3-react/core";
+import { Web3Provider } from "@ethersproject/providers";
+import { lendDeposit } from "../../../contracts/helper";
+import { toast } from "react-toastify";
 
 const DepositModal = ({ tokenName, handleButtonClick }: DepositModalProps) => {
-  const [amount, setAmount] = useState('0');
+  const [amount, setAmount] = useState("0");
   const [isLoading, setLoading] = useState(false);
+  const { active } = useWeb3React<Web3Provider>();
 
   const handleSuccessPosition = async () => {
     try {
-      setLoading(true)
-      await depositToken(7, parseInt(amount), 3)
+      if (!active) {
+        toast.error("Please connect wallet first!");
+        return;
+      }
+      setLoading(true);
+      await lendDeposit(parseInt(amount));
       handleButtonClick?.("success-position");
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -33,14 +41,12 @@ const DepositModal = ({ tokenName, handleButtonClick }: DepositModalProps) => {
           <input type="text" onChange={(e) => setAmount(e.target.value)} />
           <span className={Style.tokenLabel}>{tokenName}</span>
         </div>
-
       </div>
 
       <div className={Style.bottomContainer}>
         <ul className={Style.list}>
           <li>
-            <span>Net APY</span>{" "}
-            <span className={Style.bold}>90%</span>
+            <span>Net APY</span> <span className={Style.bold}>90%</span>
           </li>
         </ul>
 

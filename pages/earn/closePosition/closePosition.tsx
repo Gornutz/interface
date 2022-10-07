@@ -1,21 +1,17 @@
 
+import { utils } from 'ethers';
+import { IPosition } from '../../../interfaces';
 import Style from './closePosition.module.scss';
+
+interface Props {
+  handleClose: () => void;
+  position: IPosition
+}
+
 const ClosePosition = ({
   handleClose,
-  position = {
-    owner: '',
-    collToken: '',
-    underlyingToken: '',
-    underlyingAmount: '0',
-    underlyingcTokenAmount: '0',
-    collId: '',
-    collateralSize: '0',
-    debtMap: '',
-    positionId: 0,
-    debtValue: 0
-  }
-}) => {
-
+  position
+}: Props) => {
   return (
     <div className={`mt-5 ${Style.container}`}>
       <div className='p-3'>
@@ -24,7 +20,7 @@ const ClosePosition = ({
           <div className='flex'>
             <div className='text-right'>
               <div className={Style.smallText}>Collateral</div>
-              <div className={Style.text1}> {position.underlyingAmount} USDC</div>
+              <div className={Style.text1}> {utils.formatEther(position.underlyingAmount)} USDC</div>
             </div>
             <div className='text-right'>
               <div className={Style.smallText}>Profit</div>
@@ -41,7 +37,7 @@ const ClosePosition = ({
         <div>
           <div className={Style.rowContent}>
             <span>Total Position Value</span>
-            <span className='text-right'>${position.collateralSize}</span>
+            <span className='text-right'>${utils.formatEther(position.collateralSize)}</span>
           </div>
           <div className={Style.rowContent}>
             <span>Returning</span>

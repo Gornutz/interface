@@ -355,8 +355,20 @@ export function Web3Button() {
         const balance = Number.parseFloat(ethers.utils.formatEther(result));
         setEthBalance(balance);
       });
+    } else {
+      const provider = window.localStorage.getItem("provider");
+      const reConnectWallect = async () => {
+        if (provider == "coinbaseWallet") {
+          await activate(connectors.coinbaseWallet);
+        } else if (provider == "walletConnect") {
+          await activate(connectors.walletConnect);
+        } else if (provider == "injected") {
+          await activate(connectors.injected);
+        }
+      };
+      reConnectWallect();
     }
-  });
+  }, []);
 
   return (
     <>
