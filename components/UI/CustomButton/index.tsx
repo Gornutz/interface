@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import Style from "./customButton.module.scss";
+import Style from "./CustomButton.module.scss";
 import CircularProgress from "@mui/material/CircularProgress";
 import React from 'react';
 
