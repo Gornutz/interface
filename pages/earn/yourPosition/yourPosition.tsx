@@ -1,8 +1,11 @@
 import Style from "./yourPosition.module.scss";
-import { IPosition } from "../../../interfaces";
+import { ILevPosition } from "interfaces";
 import { toast } from "react-toastify";
-import { BigNumber, ethers, utils } from "ethers";
-import { useActiveWeb3React } from "../../../hooks";
+import { BigNumber, ethers } from "ethers";
+import { useActiveWeb3React, useLendingPoolInfo } from "hooks";
+import { formatBigNumber } from "utils";
+import { BANKS, SAFE_BOX } from "constant";
+import ProgressBar from "components/UI/ProgressBar/ProgressBar";
 
 const YourPosition = ({
   handleClosepositionPopup,
@@ -12,18 +15,24 @@ const YourPosition = ({
     underlyingToken: "",
     underlyingAmount: ethers.constants.Zero,
     underlyingcTokenAmount: ethers.constants.Zero,
-    collId: "",
+    collId: ethers.constants.Zero,
     collateralSize: ethers.constants.Zero,
     debtMap: "",
     positionId: 0,
     debtValue: ethers.constants.Zero,
-    risk: 0
+    health: 0,
+    cv: ethers.constants.Zero,
+    bankKey: "",
+    safeBoxKey: "",
+    apy: 0,
+    weeklyEarningsUSD: ethers.constants.Zero,
+    equitySum: ethers.constants.Zero,
   },
 }: {
   handleClosepositionPopup: any;
-  position: IPosition;
+  position: ILevPosition;
 }) => {
-  const { active } = useActiveWeb3React();
+  const { active, chainId } = useActiveWeb3React();
   const handleClick = (value: string) => {
     if (!active) {
       toast.error("Please connect wallet first!");
@@ -32,10 +41,17 @@ const YourPosition = ({
 
     handleClosepositionPopup(value);
   };
+  const lendingPool = useLendingPoolInfo(SAFE_BOX[chainId][position.safeBoxKey]?.ADDR);
 
-  let borrowingAmount = utils.formatEther(position.collateralSize);
-  let borrowingRate = BigNumber.from(position.collateralSize).mul(100).div(position.collateralSize).toNumber();
-  let leverageFactor = BigNumber.from(position.collateralSize).mul(100).div(position.underlyingAmount).toNumber()/100;
+  let leverageFactor = BigNumber.from(position.underlyingAmount).isZero() ? 0 :
+    BigNumber.from(position.collateralSize).mul(100).div(position.underlyingAmount).toNumber() / 100;
+  const pnl = (): BigNumber => {
+    if (position.debtValue.gte(position.cv)) {
+      return position.debtValue.sub(position.cv);
+    } else {
+      return position.cv.sub(position.debtValue);
+    }
+  }
 
   return (
     <div className={`mt-5 ${Style.container}`}>
@@ -43,28 +59,28 @@ const YourPosition = ({
         <div className={`${Style.rowContent} ${Style.headingRow}`}>
           <span>Your Collateral ($ Value)</span>
           <span className="text-right">
-            ${utils.formatEther(position.underlyingAmount)} USDC
+            ${formatBigNumber(position.underlyingAmount)}
           </span>
         </div>
         <div className={Style.seprator}> </div>
         <div>
           <div className={Style.rowContent}>
             <span>Total Position Value</span>
-            <span className="text-right">${utils.formatEther(position.collateralSize)} USDC</span>
+            <span className="text-right">${formatBigNumber(position.collateralSize)}</span>
           </div>
           <div className={Style.rowContent}>
-            <span>Borrowing</span>
+            <span>Debt</span>
             <span className="text-right">
-              {borrowingAmount} USDC (${borrowingAmount})
+              ${formatBigNumber(position.debtValue)}
             </span>
           </div>
           <div className={Style.rowContent}>
             <span>Borrow Rate</span>
-            <span className="text-right">{borrowingRate}%</span>
+            <span className="text-right">{lendingPool?.borrowApy.toFixed(2)}%</span>
           </div>
           <div className={Style.rowContent}>
             <span>Net APY</span>
-            <span className="text-right">110%</span>
+            <span className="text-right">{position.apy.toFixed(2)}%</span>
           </div>
         </div>
         <div className={Style.seprator}></div>
@@ -74,12 +90,22 @@ const YourPosition = ({
             <span className="text-right">{leverageFactor}x</span>
           </div>
           <div className={Style.rowContent}>
-            <span>ROI From Entry</span>
-            <span className="text-right">$100</span>
+            <span>PnL</span>
+            <span className="text-right">
+              {position.debtValue.gte(position.cv) && '-'} ${formatBigNumber(pnl())}
+            </span>
           </div>
           <div className={Style.rowContent}>
-            <span>ICHI Liquidation Price</span>
-            <span className="text-right">$1.50</span>
+            <span>Position Health</span>
+            <span className="text-right" style={{ width: '70%' }}>
+              {position.health}%
+            </span>
+          </div>
+          <div className={Style.rowContent}>
+            <ProgressBar
+              color={`linear-gradient(89.83deg, #0056e0 0.3%, #57c5e0 99.81%)`}
+              value={position.health}
+            ></ProgressBar>
           </div>
         </div>
       </div>

@@ -1,11 +1,11 @@
 import { useWeb3React } from '@web3-react/core';
 import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
 import { Web3Provider } from '@ethersproject/providers'
-import { ChainId, DEFAULT_CHAIN, NETWORK_CONNECTIONS, SUPPORTED_CHAINS } from '../constant';
+import { ChainId, DEFAULT_CHAIN, NETWORKS, SUPPORTED_CHAINS } from 'constant';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 
-export const simpleRpcProvider = new ethers.providers.JsonRpcProvider(NETWORK_CONNECTIONS[DEFAULT_CHAIN])
+export const simpleRpcProvider = new ethers.providers.JsonRpcProvider(NETWORKS[DEFAULT_CHAIN].RPC)
 
 export type Web3Ethers = ReturnType<typeof useWeb3React> & { library?: Web3Provider; chainId?: ChainId }
 

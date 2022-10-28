@@ -6,7 +6,6 @@ import { useWeb3React } from "@web3-react/core";
 import NButton from "../UI/Button/Button";
 import Style from "./web3button.module.scss";
 import { useEffect, useState } from "react";
-import { ethers } from "ethers";
 
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
@@ -18,7 +17,9 @@ import { connectors } from "./connectors";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Web3Provider } from "@ethersproject/providers";
-import { useWidth } from "../../hooks/useWidth";
+import { useWidth } from "hooks/useWidth";
+import { useActiveWeb3React, useEthBalance } from "hooks";
+import { formatBigNumber } from "utils";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   // backgroundColor: 'rgb(0 0 0 / 80%)',
@@ -74,7 +75,7 @@ interface ConnectProps {
   title: string;
 }
 const ConnectButton = ({ title, openConnectDlg }: ConnectProps) => {
-  const { library, chainId, account, activate, deactivate, active } =
+  const { activate } =
     useWeb3React<Web3Provider>();
   const setProvider = (type) => {
     window.localStorage.setItem("provider", type);
@@ -209,15 +210,15 @@ interface DisconnectProps {
   // disconnect: (() => Promise<void>) | null,
   // active: boolean,
   showConnectDlg: () => void;
-  balance: number;
 }
 
-const DisconnectButton = ({ showConnectDlg, balance }: DisconnectProps) => {
-  const { library, chainId, account, activate, deactivate, active } =
-    useWeb3React<Web3Provider>();
+const DisconnectButton = ({ showConnectDlg, }: DisconnectProps) => {
+  const { account, } = useActiveWeb3React();
+  const ethBalance = useEthBalance();
 
   const [open, setOpen] = React.useState(false);
   const [provider, setProvider] = React.useState("");
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -235,7 +236,7 @@ const DisconnectButton = ({ showConnectDlg, balance }: DisconnectProps) => {
   return (
     <>
       <NButton type="button" className="bg-white-01" onClick={handleClickOpen}>
-        <span className={`mr-3`}>{`${balance.toFixed(4)} ETH`}</span>{" "}
+        <span className="mr-3">{formatBigNumber(ethBalance)} ETH</span>
         <span>
           {account.substring(0, 6) +
             "..." +
@@ -261,8 +262,8 @@ const DisconnectButton = ({ showConnectDlg, balance }: DisconnectProps) => {
                 {provider == "injected"
                   ? " MetaMask"
                   : provider == "coinbaseWallet"
-                  ? " Coinbase"
-                  : " WalletConnect"}
+                    ? " Coinbase"
+                    : " WalletConnect"}
               </div>
               <button
                 className="border-2 disabled:pointer-events-none disabled:opacity-40 border-none bg-blue-600/20 hover:bg-blue-600/40 active:bg-blue-600/60 text-blue-600 focus:bg-blue-600/40 text-xs rounded-full px-2 h-[28px] !border font-bold flex items-center justify-center gap-1"
@@ -314,21 +315,6 @@ const DisconnectButton = ({ showConnectDlg, balance }: DisconnectProps) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3 border border-[#20223199] rounded p-4 mt-4">
-            <div className="flex items-center justify-between">
-              <div className="text-xs leading-4 font-bold text-[#7f7f7f]">
-                Recent Transactions
-              </div>
-              <button className="border-2 disabled:pointer-events-none disabled:opacity-40 border-none bg-blue-600/20 hover:bg-blue-600/40 active:bg-blue-600/60 text-blue-600 focus:bg-blue-600/40 text-xs rounded-full px-2 h-[28px] !border font-bold flex items-center justify-center gap-1">
-                Clear all
-              </button>
-            </div>
-            <div className="flex flex-col divide-y divide-dark-800">
-              <div className="text-xs leading-4 font-bold text-[#7f7f7f]">
-                Your transactions will appear here...
-              </div>
-            </div>
-          </div>
         </DialogContent>
       </BootstrapDialog>
     </>
@@ -336,11 +322,9 @@ const DisconnectButton = ({ showConnectDlg, balance }: DisconnectProps) => {
 };
 
 export function Web3Button() {
-  const { library, chainId, account, activate, deactivate, active } =
-    useWeb3React<Web3Provider>();
+  const { account, activate, deactivate, active } = useWeb3React<Web3Provider>();
 
   const [openConnectDlg, setOpenConnectDlg] = React.useState(false);
-  const [ethBalance, setEthBalance] = useState<number>(0);
 
   const handleShowConnectDlg = () => {
     window.localStorage.setItem("provider", undefined);
@@ -350,12 +334,7 @@ export function Web3Button() {
   const width = useWidth();
 
   useEffect(() => {
-    if (active && account) {
-      library?.getBalance(account).then((result) => {
-        const balance = Number.parseFloat(ethers.utils.formatEther(result));
-        setEthBalance(balance);
-      });
-    } else {
+    if (!(active && account)) {
       const provider = window.localStorage.getItem("provider");
       const reConnectWallect = async () => {
         if (provider == "coinbaseWallet") {
@@ -368,13 +347,12 @@ export function Web3Button() {
       };
       reConnectWallect();
     }
-  }, []);
+  }, [account, active, activate]);
 
   return (
     <>
       {active ? (
         <DisconnectButton
-          balance={ethBalance}
           showConnectDlg={handleShowConnectDlg}
         />
       ) : (

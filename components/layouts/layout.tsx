@@ -1,8 +1,8 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import styles from "./layout.module.scss";
-import { useWidth } from "../../hooks/useWidth";
+import { useWidth } from "hooks/useWidth";
 import { useTheme } from "@mui/material/styles";
 
 type LayoutProps = {

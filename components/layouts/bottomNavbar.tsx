@@ -4,7 +4,7 @@ import Style from "./bottomNavbar.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const BottomNavbar = ({}) => {
+const BottomNavbar = ({ }) => {
   const router = useRouter();
   const pathName = router.pathname;
   const [menuItems, setMenuItems] = useState([

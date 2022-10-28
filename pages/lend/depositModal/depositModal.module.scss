@@ -40,6 +40,7 @@
   .chooseSubContainer {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
+
   .chooseSubContainerLabel {
     padding-bottom: 27px;
   }
@@ -48,13 +49,14 @@
     padding: 20px;
     display: flex;
     align-items: center;
-    column-gap: 25px;
     margin-top: 20px;
+
     @media (max-width: 680px) {
       column-gap: 15px;
     }
 
     label {
+      margin-right: 25px;
       font-size: 12px;
       font-weight: 400;
       color: #fff;
@@ -66,10 +68,10 @@
     }
 
     input[type="text"] {
-      width: 90px;
       height: 40px;
       background: rgba(255, 255, 255, 0.25);
       border-radius: 14px;
+      margin-left: 20px;
       margin-right: 5px;
       outline: none;
       padding: 5px 10px;
@@ -81,10 +83,34 @@
     }
 
     .tokenLabel {
+      margin: 0 10px;
       color: #fff;
       font-family: heebo;
       font-weight: 500;
     }
+  }
+}
+
+.container {
+  .seprator {
+    background: rgba(255, 255, 255, 0.2);
+    height: 1px;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .headingRow {
+    font-weight: 500 !important;
+  }
+
+  .rowContent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 29px;
   }
 }
 
@@ -100,9 +126,11 @@
   @media (max-width: 680px) {
     display: block;
   }
+
   .list {
     width: 50%;
     list-style: unstyled;
+
     li {
       display: flex;
       color: #fff;
@@ -110,10 +138,12 @@
       font-size: 12px;
       font-weight: 300;
       white-space: pre;
+
       //  column-gap: 25px;
       .bold {
         font-weight: 400;
       }
+
       span {
         width: 50%;
       }
@@ -126,6 +156,7 @@
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 20px;
+
     @media (max-width: 680px) {
       width: 80%;
       margin-top: 20px;

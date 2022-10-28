@@ -1,51 +1,44 @@
-import { StayPrimaryLandscapeSharp } from "@mui/icons-material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState, useContext } from "react";
-import { useWidth } from "../../hooks/useWidth";
-import Button from "../UI/Button/Button";
-import Dropdown from "../UI/Dropdown/Dropdown";
+import { useWidth } from "hooks/useWidth";
+import ChainDropdown from "../UI/ChainDropdown";
 import Text from "../UI/Text/Text";
 import styles from "./header.module.scss";
 import Sidebar from "./sidebar";
 import { Web3Button } from "../web3/Web3Button";
-import IconButton from "@mui/material/IconButton";
-import ColorModeContext from "../../context/ColorModeContext";
+import ColorModeContext from "context/ColorModeContext";
 import { useTheme } from "@mui/material/styles";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { IconButton } from "@mui/material";
+import { useTotalTvl } from "hooks";
+import { formatBigNumber } from "utils";
 
 const Header = () => {
   const [title, setTitle] = useState("Overview");
-  const [isEarn, setIsEarn] = useState(false);
-  const [isLend, setIsLend] = useState(false);
-  const [isOverview, setIsOverview] = useState(false);
   const [open, setOpen] = useState(false);
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
 
+  const width = useWidth();
   const router = useRouter();
   const pathName = router.pathname;
-  const width = useWidth();
+
+  const totalTvl = useTotalTvl();
+
   useEffect(() => {
     switch (pathName) {
       case "/earn":
         setTitle("Earn");
-        setIsEarn(true);
-        setIsLend(false);
-        setIsOverview(false);
         break;
-
       case "/lend":
         setTitle("Lend");
-        setIsEarn(false);
-        setIsLend(true);
-        setIsOverview(false);
+        break;
+      case "/faucet":
+        setTitle("Faucet");
         break;
       default:
         setTitle("Overview");
-        setIsLend(false);
-        setIsEarn(false);
-        setIsOverview(true);
         break;
     }
   }, [pathName]);
@@ -64,14 +57,11 @@ const Header = () => {
           </Text>
 
           <div className="flex my-grid items-center">
-            {isOverview && (
-              <Text className="mr-4">
-                {" "}
-                <h4>LTV $000,000.00</h4>
-              </Text>
-            )}
-            {/* <IconButton
-              sx={{ marginRight: '10px' }}
+            <Text className="mr-4">
+              <h4>TVL ${formatBigNumber(totalTvl, 18, 2)}</h4>
+            </Text>
+            <IconButton
+              sx={{ marginRight: '10px', display: 'none' }}
               onClick={colorMode.toggleColorMode}
               color="inherit"
             >
@@ -85,12 +75,11 @@ const Header = () => {
                 width={34}
                 height={34}
               />
-            </IconButton> */}
+            </IconButton>
 
-            <div
-              className={`rounded-[12px] p-[7px] ${
-                theme.palette.mode === "light" ? "bg-[#e2e8f0]" : "bg-[#214554]"
-              }`}
+            {/* <div
+              className={`hide rounded-[12px] p-[7px] ${theme.palette.mode === "light" ? "bg-[#e2e8f0]" : "bg-[#214554]"
+                }`}
             >
               <NotificationsIcon
                 sx={{
@@ -99,7 +88,7 @@ const Header = () => {
                   color: theme.palette.mode === "light" ? "#0B2845" : "#fff",
                 }}
               />
-            </div>
+            </div> */}
 
             {/* <Image
               src="/icons/notification.svg"
@@ -108,7 +97,7 @@ const Header = () => {
               height={40}
             /> */}
 
-            <Dropdown className={"flex-1"}></Dropdown>
+            <ChainDropdown className={"flex-1"}></ChainDropdown>
 
             <Web3Button />
           </div>
@@ -164,11 +153,9 @@ const Header = () => {
             </IconButton> */}
           </div>
           <div
-            className={`absolute top-20 left-0 h-screen w-screen  transform ${
-              styles.mobileNavbarBg
-            } ${
-              open ? "-translate-x-0" : "-translate-x-full"
-            } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
+            className={`absolute top-20 left-0 h-screen w-screen  transform ${styles.mobileNavbarBg
+              } ${open ? "-translate-x-0" : "-translate-x-full"
+              } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
           >
             <div className={`${styles.mobileNavbarContainer} h-[90px]`}>
               <div className="flex flex-col h-full">

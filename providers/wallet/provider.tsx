@@ -7,12 +7,11 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletContext } from './context';
 
 import {
-  NETWORK_CONNECTIONS,
   SUPPORTED_CHAINS,
-  NETWORK_NAMES,
-  ChainId
-} from '../../constant'
-import { useActiveWeb3React, useEthers } from '../../hooks'
+  ChainId,
+  NETWORKS
+} from 'constant'
+import { useActiveWeb3React, useEthers } from 'hooks'
 
 // connectors
 const injected = new InjectedConnector({
@@ -21,7 +20,7 @@ const injected = new InjectedConnector({
 
 const walletConnectConnector = () => {
   return new WalletConnectConnector({
-    rpc: { [ChainId.Mainnet]: NETWORK_CONNECTIONS[ChainId.Mainnet] },
+    rpc: { [ChainId.Mainnet]: NETWORKS[ChainId.Mainnet].RPC },
     supportedChainIds: [ChainId.Mainnet],
     qrcode: true
   })
@@ -46,8 +45,8 @@ export function WalletProvider({ children }: Props): React.ReactElement {
   const [unsupportedChain, setUnsupportedChain] = useState(false)
   const [completedInitialLoad, setCompletedInitialLoad] = useState(false)
 
-  const networkName = (chainId && NETWORK_NAMES[chainId]) ?
-    NETWORK_NAMES[chainId] : 'unsupported'
+  const networkName = (chainId && NETWORKS[chainId]) ?
+    NETWORKS[chainId].NAME : 'unsupported'
 
   const activeConnector = (() => {
     if (connector instanceof WalletConnectConnector) return 'WALLETCONNECT'

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import CustomButton from "../../../components/UI/customButton/customButton";
+import CustomButton from "components/UI/CustomButton";
+import { TOKEN_LOGO } from "constant";
 import styles from "./availableFaultMobile.module.scss";
 
 const AvailableFaultMobile = ({
@@ -23,7 +24,7 @@ const AvailableFaultMobile = ({
             <div className={`flex justify-between ${styles.container}`}>
               <div className="flex items-center">
                 <Image
-                  src="/icons/pic1.svg"
+                  src={TOKEN_LOGO.BLB}
                   width={40}
                   height={40}
                   alt="icon"

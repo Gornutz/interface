@@ -1,4 +1,4 @@
-import { useDebounce, useActiveWeb3React, simpleRpcProvider } from '../../hooks';
+import { useDebounce, useActiveWeb3React, simpleRpcProvider } from 'hooks';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateBlockNumber } from './actions';

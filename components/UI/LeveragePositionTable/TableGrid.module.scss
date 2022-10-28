@@ -112,6 +112,10 @@
     // justify-content: flex-end;
     // margin: auto;
 
+    td {
+      padding-top: 0;
+    }
+
     @include for-size(phone-only) {
       display: flex;
       flex-direction: column;

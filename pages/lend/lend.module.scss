@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+
   @include for-size(phone-only) {
     flex-direction: column;
     align-items: flex-start;
@@ -13,18 +14,21 @@
   .heading {
     font-size: 16px;
   }
+
   .text {
     color: #8d97a0;
     font-family: 12px;
     width: 100%;
     margin-top: 0.4rem;
     line-height: 18px;
+
     @include for-size(phone-only) {
       width: 100%;
       margin-top: 0.8rem;
       line-height: 20.56px;
     }
   }
+
   .rightContainer {
     display: flex;
     align-items: flex-end;
@@ -38,72 +42,91 @@
       flex-direction: column;
       align-items: flex-start;
     }
+
     .title {
       color: white;
       text-align: end;
       font-size: 18px;
+
       @include for-size(phone-only) {
         font-size: 24px;
         line-height: 35px;
         font-weight: 500;
       }
     }
+
     .btnSearch {
       border-radius: 14px;
       width: 400px;
       height: 34px;
       padding: 10px 20px;
       outline: none;
+
       @media (max-width: 680px) {
         width: 100%;
       }
     }
   }
 }
+
 .tab {
   color: white;
 }
+
 .depositButton {
   margin-right: 0.4rem !important;
 }
+
 .divider {
   height: 2px;
   width: 100%;
 }
+
 .dividerDark {
   background: rgba(255, 255, 255, 0.1);
 }
+
 .dividerLight {
   background: rgba(0, 0, 0, 0.1);
 }
+
 .table {
   margin-top: 1rem;
   width: 100%;
+
   .tHeading {
     color: #8d97a0;
     padding: 1rem 2rem;
+
     @include for-size(phone-only) {
       font-size: 0.8em;
     }
   }
+
   .tbody {
     vertical-align: top;
+
     td {
       background: rgba(255, 255, 255, 0.05);
       padding: 2rem;
+
       @include for-size(phone-only) {
         font-size: 0.8em;
       }
     }
+
     .columnRoundLeft {
       border-top-left-radius: 10px;
     }
+
     .columnRoundRight {
       border-top-right-radius: 10px;
     }
+
     .columnRoundBottomLeft {
       border-bottom-left-radius: 10px;
     }
+
     .columnRoundBottomRight {
       border-bottom-right-radius: 10px;
     }
@@ -121,6 +144,7 @@
       td:first-child {
         border-top-left-radius: 10px;
       }
+
       td:last-child {
         border-top-right-radius: 10px;
       }
@@ -130,6 +154,7 @@
       td:first-child {
         border-bottom-left-radius: 10px;
       }
+
       td:last-child {
         border-bottom-right-radius: 10px;
       }
@@ -140,15 +165,18 @@
     display: flex;
     align-items: top;
   }
+
   .bottom {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
+
   .rowBottom {
     display: flex;
     align-items: center;
     width: 90%;
     justify-content: flex-end;
     margin: auto;
+
     .innerContainer {
       height: 10px;
       width: 80%;
@@ -157,6 +185,7 @@
       border-radius: 20px;
       position: relative;
     }
+
     .container {
       position: absolute;
       height: 10px;
@@ -166,6 +195,7 @@
       background: linear-gradient(89.83deg, #0056e0 0.3%, #57c5e0 99.81%);
       border-radius: 20px;
     }
+
     .bottomContainer {
       background: linear-gradient(63.51deg, #007994 33.26%, #04ac5c 100%);
       position: absolute;
@@ -181,34 +211,44 @@
 .table_bottom {
   margin-top: 1rem;
   width: 100%;
+
   @include for-size(phone-only) {
     display: grid;
     overflow-x: auto;
   }
+
   .tHeading {
     color: #8d97a0;
     padding: 1rem;
+
     @include for-size(phone-only) {
       font-size: 0.8em;
     }
   }
+
   .tbody {
     vertical-align: middle;
+
     td {
-      padding: 0.5rem;
+      padding: 1rem;
+
       @include for-size(phone-only) {
         font-size: 0.8em;
       }
     }
+
     .columnRoundLeft {
       border-top-left-radius: 10px;
     }
+
     .columnRoundRight {
       border-top-right-radius: 10px;
     }
+
     .columnRoundBottomLeft {
       border-bottom-left-radius: 10px;
     }
+
     .columnRoundBottomRight {
       border-bottom-right-radius: 10px;
     }
@@ -223,15 +263,18 @@
     display: flex;
     align-items: center;
   }
+
   .bottom {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
+
   .rowBottom {
     display: flex;
     align-items: center;
     width: 90%;
     justify-content: flex-end;
     margin: auto;
+
     .innerContainer {
       height: 10px;
       width: 80%;
@@ -240,6 +283,7 @@
       border-radius: 20px;
       position: relative;
     }
+
     .container {
       position: absolute;
       height: 10px;
@@ -249,6 +293,7 @@
       background: linear-gradient(89.83deg, #0056e0 0.3%, #57c5e0 99.81%);
       border-radius: 20px;
     }
+
     .bottomContainer {
       background: linear-gradient(63.51deg, #007994 33.26%, #04ac5c 100%);
       position: absolute;

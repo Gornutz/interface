@@ -54,6 +54,7 @@ a {
 .bg-main-dark {
   background: linear-gradient(118.56deg, #0f2337 0%, #003d4a 100%);
 }
+
 .bg-main-light {
   background-color: #f4f0e6;
 }
@@ -94,13 +95,14 @@ header {
   line-height: 24px;
 }
 
-.side-bottom > div {
+.side-bottom>div {
   flex: 50%;
 
   /* or - flex: 0 50% - or - flex-basis: 50% - */
   @include devices(phone) {
     flex: 100% !important;
   }
+
   @include devices(tablet) {
     flex: 100% !important;
   }
@@ -117,11 +119,9 @@ header {
 }
 
 .green-btn {
-  background: linear-gradient(
-    42.73deg,
-    #017d91 -79.94%,
-    #05ac5c 159.12%
-  ) !important;
+  background: linear-gradient(42.73deg,
+      #017d91 -79.94%,
+      #05ac5c 159.12%) !important;
   border-radius: 14px !important;
 }
 
@@ -204,4 +204,32 @@ Circle style ends
 
 .bg-white-05 {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.amount-input {
+  position: relative;
+}
+
+.amount-input input {
+  padding-left: 50px;
+  background-repeat: no-repeat;
+  background-position: 6px center;
+  border: 3px solid #414C5C;
+  border-radius: 20px;
+}
+
+.amount-input .maxbtn {
+  position: absolute;
+  right: 8px;
+  top: 18px;
+  padding: 5px 9px;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: -0.141818px;
+  border-radius: 14px;
+  border: 1px solid #ffffff;
+  color: white !important;
+  background: linear-gradient(42.73deg,
+      #01279167 -79.94%,
+      #05a7ac4a 159.12%) !important;
 }

@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { ChainId } from '../../constant';
-import { useActiveWeb3React } from '../../hooks';
+import { useSelector } from 'react-redux';
+import { ChainId } from 'constant';
+import { useActiveWeb3React } from 'hooks';
 import { AppState } from '../index';
 
 export function useBlockNumber(): number {

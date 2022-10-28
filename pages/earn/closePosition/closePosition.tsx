@@ -1,11 +1,10 @@
-
-import { utils } from 'ethers';
-import { IPosition } from '../../../interfaces';
+import { ILevPosition } from 'interfaces';
+import { formatBigNumber } from 'utils';
 import Style from './closePosition.module.scss';
 
 interface Props {
   handleClose: () => void;
-  position: IPosition
+  position: ILevPosition
 }
 
 const ClosePosition = ({
@@ -20,7 +19,7 @@ const ClosePosition = ({
           <div className='flex'>
             <div className='text-right'>
               <div className={Style.smallText}>Collateral</div>
-              <div className={Style.text1}> {utils.formatEther(position.underlyingAmount)} USDC</div>
+              <div className={Style.text1}> {formatBigNumber(position?.underlyingAmount)} USDC</div>
             </div>
             <div className='text-right'>
               <div className={Style.smallText}>Profit</div>
@@ -37,7 +36,7 @@ const ClosePosition = ({
         <div>
           <div className={Style.rowContent}>
             <span>Total Position Value</span>
-            <span className='text-right'>${utils.formatEther(position.collateralSize)}</span>
+            <span className='text-right'>${formatBigNumber(position?.collateralSize)}</span>
           </div>
           <div className={Style.rowContent}>
             <span>Returning</span>
@@ -49,7 +48,6 @@ const ClosePosition = ({
           <span>ROI From Entry</span>
           <span className='text-right'>$100 (+33%)</span>
         </div>
-
 
         <button className={`mt-4 ${Style.button}`} onClick={handleClose}>
           Close Positon

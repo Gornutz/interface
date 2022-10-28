@@ -17,7 +17,6 @@ const store = configureStore({
     save({ states: PERSISTED_KEYS }),
     // createLogger()
   ],
-  preloadedState: load({ states: PERSISTED_KEYS }),
 });
 
 export default store;

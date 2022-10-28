@@ -24,7 +24,7 @@ const PositionDetails = () => {
         </div>
       </div>
       <div className={`mt-5 text-white flex justify-between py-2 px-3`}>
-        <span>ICHI Liquidation Price</span>
+        <span>BLB Liquidation Price</span>
         <span>$2.00</span>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CustomButton from "../../../components/UI/customButton/customButton";
+import CustomButton from "components/UI/CustomButton";
 import styles from "./mobileTableLend.module.scss";
 
 const MobileTableLend = ({
@@ -41,7 +41,7 @@ const MobileTableLend = ({
               <span className={styles.containerTitle}>Total Supply</span>
               <div className={styles.rightContainer}>
                 <span className={styles.containerSubTitle}>
-                  {row.totalSupplyIchi}
+                  {row.totalSupplyBlb}
                 </span>
                 <span className={styles.containerSubTitle1}>
                   {row.totalSupplyusd}
@@ -52,7 +52,7 @@ const MobileTableLend = ({
               <span className={styles.containerTitle}>Total Borrowed</span>
               <div className={styles.rightContainer}>
                 <span className={styles.containerSubTitle}>
-                  {row.totalBorrowedIchi}
+                  {row.totalBorrowedBlb}
                 </span>
                 <span className={styles.containerSubTitle1}>
                   {row.totalBorrowedUsd}
