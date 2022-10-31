@@ -1,0 +1,45 @@
+@import "../../styles/mixin.scss";
+
+.rightLayout {
+  height: 100vh;
+  overflow-y: scroll;
+
+  @include for-size(phone-only) {
+    overflow-x: hidden;
+    height: 100vh;
+    padding: 15px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #21b499;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e6e7e7;
+  }
+}
+
+.bottomContainer {
+  @include for-size(phone-only) {
+    padding-bottom: 7rem;
+  }
+}
+
+.itemIcon {
+  flex-direction: column;
+  align-items: center;
+  span {
+    margin-top: 4px;
+  }
+}
+.selectedItem {
+  // background: #1b2e41;
+  border-radius: 20px;
+  span {
+    color: white !important;
+  }
+}

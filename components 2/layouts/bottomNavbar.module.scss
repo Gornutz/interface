@@ -1,0 +1,23 @@
+.mainContainer {
+  background: rgba(253, 253, 253, 0.2) !important;
+  border-radius: 30px 30px 0 0 !important;
+  backdrop-filter: blur(15px);
+  z-index: 999;
+  .bottomContainer {
+    height: 76px;
+    background-color: transparent !important;
+    width: 70%;
+    margin: auto;
+    .navItem {
+      span {
+        // height: 30px;
+        color: white !important;
+      }
+    }
+    .activeItem {
+      span {
+        color: white !important;
+      }
+    }
+  }
+}
