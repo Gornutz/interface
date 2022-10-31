@@ -85,7 +85,7 @@ const Home: NextPage = () => {
             <p className={styles.text}>
               Enter multi-step strategies that manage themselves in a single click. 
               <br />
-              Borrow, deploy, and earn on autopilot with your perferred assets.
+              Borrow, deploy, and earn on autopilot with your preferred assets.
               <br />
               <br />
               Leverage can be applied optionally to boost the yield earned.
