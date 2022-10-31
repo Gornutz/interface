@@ -157,7 +157,7 @@ const Sidebar = ({
           </Link>
         </div>
         <div>
-          <Link href={"https://discord.com/invite/VJAPVjy5uk"}>
+          <Link href={"https://discord.gg/blueberry"}>
             <a>
               <Image
                 src="/social/discord.svg"
